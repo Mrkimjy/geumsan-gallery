@@ -8,6 +8,7 @@
 <meta property="og:title" content="김진영 Space">
 <meta property="og:description" content="Photography · 조직문화 · HR · 강연 기록">
 <meta property="og:type" content="website">
+<meta property="og:see_also" content="https://www.instagram.com/kimjy0905/">
 <title>김진영 Space</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
 
@@ -629,6 +630,7 @@ img { max-width: 100%; display: block; }
         <div class="footer-acc-head">연결 <span class="footer-acc-plus">+</span></div>
         <div class="footer-acc-body">
           <a class="footer-acc-link" href="https://blog.naver.com/a840127" target="_blank">네이버 블로그 AlignUp.F↑</a>
+          <a class="footer-acc-link" href="https://www.instagram.com/kimjy0905/" target="_blank" rel="noopener">Instagram @kimjy0905</a>
           <a class="footer-acc-link" href="https://itdaa.net" target="_blank">잇다 멘토</a>
           <a class="footer-acc-link" href="https://www.hankooktire.com" target="_blank">한국타이어앤테크놀로지</a>
         </div>
@@ -636,8 +638,9 @@ img { max-width: 100%; display: block; }
     </div>
     <div class="footer-social">
       <div class="footer-social-btn" onclick="window.open('https://blog.naver.com/a840127')">N</div>
-      <div class="footer-social-btn" onclick="showToast('YouTube')">▶</div>
-      <div class="footer-social-btn" onclick="showToast('Instagram')">◎</div>
+      <div class="footer-social-btn" title="Instagram" onclick="window.open('https://www.instagram.com/kimjy0905/','_blank','noopener')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      </div>
       <div class="footer-social-btn" onclick="window.open('https://itdaa.net')">i</div>
     </div>
     <div class="footer-legal">
@@ -735,8 +738,12 @@ img { max-width: 100%; display: block; }
   <div class="recent-blog-title">📝 최근 글</div>
   <div id="aboutBlogList"></div>
 
-  <div style="text-align:center;margin-top:16px;">
-    <a href="https://blog.naver.com/a840127" target="_blank" class="hero-cta-btn" style="display:inline-flex;background:#111;color:#fff;">네이버 블로그 보기 →</a>
+  <div style="text-align:center;margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://blog.naver.com/a840127" target="_blank" rel="noopener" class="hero-cta-btn" style="display:inline-flex;background:#111;color:#fff;">네이버 블로그 보기 →</a>
+    <a href="https://www.instagram.com/kimjy0905/" target="_blank" rel="noopener" class="hero-cta-btn" style="display:inline-flex;gap:6px;align-items:center;background:#fff;color:#111;border:1px solid var(--border);">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
   </div>
 
   <!-- Work With Me -->
@@ -1090,22 +1097,20 @@ blogPosts.forEach(p => {
 // ── NEWS DATA ──
 // <!--NEWS:START--> 이 블록은 GitHub Actions가 매일 자동 갱신합니다. 직접 수정 시 다음 실행에 덮어써집니다.
 const newsData = {
-  updated: "2026.10.11 08:16",
   HR: [
-    { emoji:"📊", bg:"#e8f0fe", source:"연합뉴스", headline:"파업 근로손실일수 9월까지 50만일 육박…작년 연간치 넘어", summary:"(서울=연합뉴스) 옥성구 기자 = 파업에 따른 손실을 보여주는 지표인 근로손실일수가 올해 3분기까지 '50만일'에 육박하며, 이미 작년 한 해 ...", date:"2026.10.11", isNew:true, url:"https://www.yna.co.kr/view/AKR20261009052800530" },
-    { emoji:"👥", bg:"#f3e8ff", source:"연합뉴스", headline:"건설 임시일용직 30만명 넘게 떠났다…비자발적 이직 7개월째↑", summary:"(세종=연합뉴스) 이세원 기자 = 반도체 산업이 초호황을 누리는 가운데 건설업에서는 임시일용직을 중심으로 30만명 넘는 종사자가 원하지 않는데도...", date:"2026.10.11", isNew:true, url:"https://www.yna.co.kr/view/AKR20261010033300002" },
-    { emoji:"🎓", bg:"#fef3c7", source:"연합뉴스", headline:"\"부산 여성과학기술인 안정적 일자리·연구 경력 지원해야\"", summary:"(부산=연합뉴스) 오수희 기자 = 부산시와 지역 과학기술정책 전담 기관인 부산과학기술고등교육진흥원(BISTEP)은 '부산 여성과학기술인 육성 및...", date:"2026.10.10", isNew:true, url:"https://www.yna.co.kr/view/AKR20261008041000051" },
+    { emoji:'📊', bg:'#e8f0fe', source:'HR Insight', headline:'2026년 국내 기업 직원 몰입도 조사 결과 발표', summary:'국내 주요 기업 1,200개사 대상 직원 몰입도 조사에서 소조직 단위 소통 강화 기업이 평균 23% 높은 몰입도를 보였습니다.', date:'2026.10.09', isNew:true },
+    { emoji:'👥', bg:'#f3e8ff', source:'HR Korea', headline:'MZ세대 리더십 트렌드: 수평적 소통이 핵심', summary:'2026년 직장 내 리더십 트렌드 보고서에 따르면 MZ세대 직원들은 수평적 소통과 즉각적 피드백을 가장 중요한 리더십 요소로 꼽았습니다.', date:'2026.10.08', isNew:true },
+    { emoji:'🎓', bg:'#fef3c7', source:'월간 인사관리', headline:'직장 내 멘토링 프로그램 효과 연구 결과', summary:'멘토링 프로그램을 운영하는 기업의 신입사원 1년 이내 이직률이 평균 31% 낮은 것으로 나타났습니다.', date:'2026.10.06', isNew:false },
   ],
   Tire: [
-    { emoji:"🛞", bg:"#fee2e2", source:"연합뉴스", headline:"현대차, 분기 영업이익 기아에 역전당하나…매출도 6년만에 감소", summary:"(서울=연합뉴스) 홍규빈 기자 = 올해 판매 부진을 겪고 있는 현대차의 3분기 영업이익과 매출이 동반 감소할 것이라는 전망이 나온다.", date:"2026.10.11", isNew:true, url:"https://www.yna.co.kr/view/AKR20261010031400003" },
-    { emoji:"🚗", bg:"#e0e7ff", source:"연합뉴스", headline:"대전시, 수소전기차 50대 추가 보급…보조금 대당 3천250만원", summary:"(대전=연합뉴스) 양영석 기자 = 대전시는 수소전기차(수소차) 50대를 추가로 보급한다고 9일 밝혔다.", date:"2026.10.09", isNew:false, url:"https://www.yna.co.kr/view/AKR20261009020100063" },
-    { emoji:"🏭", bg:"#ecfdf5", source:"연합뉴스", headline:"[시승기] 강인하지만 부드럽다…현대차 '디 올 뉴 투싼'", summary:"연합뉴스 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.", date:"2026.10.09", isNew:false, url:"https://www.yna.co.kr/view/AKR20261008179100003" },
+    { emoji:'🚗', bg:'#dcfce7', source:'AutoNews', headline:'한국타이어, 2026 EV 전용 타이어 신제품 출시', summary:'한국타이어앤테크놀로지가 전기차 전용 고성능 타이어 신라인업을 발표했습니다. 주행거리 연장과 소음 저감에 초점을 맞춘 제품입니다.', date:'2026.10.10', isNew:true },
+    { emoji:'⚡', bg:'#fef3c7', source:'Electric Vehicle', headline:'글로벌 EV 판매량 2026년 3분기 사상 최대', summary:'전세계 전기차 판매량이 2026년 3분기에 분기 기준 최초로 500만대를 돌파했습니다. 타이어 산업에도 EV 전용 제품 수요가 급증하고 있습니다.', date:'2026.10.07', isNew:false },
   ],
   Econ: [
-    { emoji:"💰", bg:"#ecfdf5", source:"연합뉴스", headline:"답답한 증시 대신 발행어음?…증권사, 4∼5% 상품 잇달아 출시", summary:"(서울=연합뉴스) 임은진 기자 = 최근 답답한 흐름을 보이는 코스피에 지친 투자자를 잡기 위해 증권사들이 잇달아 금리 4∼5% 수준의 발행어음 ...", date:"2026.10.11", isNew:true, url:"https://www.yna.co.kr/view/AKR20261009024400008" },
-    { emoji:"📈", bg:"#fef9c3", source:"연합뉴스", headline:"국채금리 급등에 줄어든 매력에도…개인, 리츠 ETF 순매수액↑", summary:"(서울=연합뉴스) 고은지 기자 = 최근 국채 금리가 고공행진하면서 리츠(REITs·부동산투자회사) 상장지수펀드(ETF)의 매력이 상대적으로 줄었...", date:"2026.10.11", isNew:true, url:"https://www.yna.co.kr/view/AKR20261008168900008" },
-    { emoji:"🏦", bg:"#e0f2fe", source:"매일경제", headline:"대만증시 14% 일본 7% 뛰는데 코스피 0.48%…AI랠리 소외 이유가", summary:"① 메모리 의존도 높은 한국 직격탄 ② 원화 강세에 수출주 눈높이 하향 ③ 외국인 한달간 28조원 폭풍매도글로벌 증시가 인공지능(AI) 랠리를 재개하며 신고가 행진을 이어가는 가..", date:"2026.10.11", isNew:true, url:"https://www.mk.co.kr/news/stock/12172810" },
-  ],
+    { emoji:'💹', bg:'#dcfce7', source:'한국경제', headline:'IRP·연금저축 세액공제 한도 2027년 확대 검토', summary:'정부가 개인형 퇴직연금(IRP)과 연금저축펀드의 세액공제 한도를 현행 900만원에서 1,200만원으로 확대하는 방안을 검토 중인 것으로 알려졌습니다.', date:'2026.10.09', isNew:true },
+    { emoji:'🏦', bg:'#e8f0fe', source:'조선일보', headline:'코스피 2,800선 회복… 반도체·2차전지 주도', summary:'코스피 지수가 외국인 매수세에 힘입어 2,800선을 탈환했습니다. 반도체와 2차전지 업종이 상승세를 이끌었습니다.', date:'2026.10.10', isNew:true },
+    { emoji:'🏠', bg:'#fef3c7', source:'부동산114', headline:'지방 중소도시 아파트 거래량 3개월 연속 증가', summary:'충남·충북 등 지방 중소도시 아파트 거래량이 3개월 연속 증가세를 보이고 있습니다. 금리 인하 기대감과 실수요 증가가 주요 요인으로 분석됩니다.', date:'2026.10.08', isNew:false },
+  ]
 };
 // <!--NEWS:END-->
 function renderNews(containerId, list) {
