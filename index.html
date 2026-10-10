@@ -6,7 +6,6 @@
   --bg: #ffffff;
   --bg2: #f5f5f5;
   --nav-h: 56px;
-  --util-h: 36px;
   --accent: #E30613;
   --fg: #111111;
   --fg2: #555555;
@@ -23,17 +22,6 @@ a { color: inherit; text-decoration: none; }
 button { cursor: pointer; font-family: inherit; border: none; background: none; }
 img { max-width: 100%; display: block; }
 
-/* UTIL BAR */
-.util-bar {
-  background: #111; height: var(--util-h);
-  display: flex; align-items: center; padding: 0 20px;
-  font-size: 11px; color: rgba(255,255,255,.5); position: relative; z-index: 200;
-}
-.util-bar-left { display: flex; align-items: center; gap: 14px; }
-.util-bar-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
-.util-link { font-size: 11px; color: rgba(255,255,255,.5); transition: color .15s; }
-.util-link:hover { color: #fff; }
-.util-sep { width: 1px; height: 10px; background: rgba(255,255,255,.2); }
 
 /* MAIN NAV */
 .main-nav {
@@ -59,7 +47,7 @@ img { max-width: 100%; display: block; }
 
 /* MOBILE MENU */
 .mobile-menu {
-  display: none; position: fixed; top: calc(var(--util-h) + var(--nav-h)); left: 0; right: 0; bottom: 0;
+  display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
   background: #fff; z-index: 90; overflow-y: auto; padding: 20px; flex-direction: column;
 }
 .mobile-menu.open { display: flex; }
@@ -67,7 +55,7 @@ img { max-width: 100%; display: block; }
 .mobile-nav-item:hover { color: var(--accent); }
 
 /* HERO */
-.hero { position: relative; overflow: hidden; height: calc(100svh - var(--nav-h) - var(--util-h)); min-height: 360px; max-height: 680px; background: #1a1f2e; }
+.hero { position: relative; overflow: hidden; height: calc(100svh - var(--nav-h)); min-height: 360px; max-height: 680px; background: #1a1f2e; }
 .hero-slides { display: flex; height: 100%; transition: transform .6s cubic-bezier(.4,0,.2,1); }
 .hero-slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: flex-end; padding: 0 0 80px; }
 .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
@@ -250,23 +238,6 @@ img { max-width: 100%; display: block; }
 </style>
 
 <div class="toast" id="toast"></div>
-
-<!-- UTILITY BAR -->
-<div class="util-bar">
-  <div class="util-bar-left">
-    <a class="util-link" href="#" onclick="navigate('home');return false">홈</a>
-    <div class="util-sep"></div>
-    <a class="util-link" href="#">금산공장</a>
-    <div class="util-sep"></div>
-    <a class="util-link" href="#">경영관리팀</a>
-  </div>
-  <div class="util-bar-right">
-    <span style="font-size:12px">🌐</span>
-    <a class="util-link" href="#">한국</a>
-    <div class="util-sep"></div>
-    <a class="util-link" href="#">글로벌</a>
-  </div>
-</div>
 
 <!-- MAIN NAV -->
 <nav class="main-nav">
