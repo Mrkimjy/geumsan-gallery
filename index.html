@@ -229,6 +229,24 @@ img { max-width: 100%; display: block; }
   .nav-links, .nav-cta { display: none; }
   .hamburger { display: flex; }
 }
+
+/* ── Work With Me ── */
+.wwm-section { margin: 48px 0 8px; padding: 44px 32px 48px; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); border-radius: 16px; text-align: center; }
+.wwm-top-label { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); border-radius: 20px; padding: 4px 14px; margin-bottom: 16px; }
+.wwm-heading { font-size: 1.7rem; font-weight: 900; color: #fff; margin: 0 0 12px; letter-spacing: -.02em; }
+.wwm-sub { font-size: .9rem; color: #aaa; line-height: 1.7; margin: 0 0 32px; }
+.wwm-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 36px; }
+@media (max-width: 600px) { .wwm-cards { grid-template-columns: 1fr; } .wwm-section { padding: 32px 20px; } .wwm-heading { font-size: 1.3rem; } }
+.wwm-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 12px; padding: 22px 16px; transition: border-color .25s, transform .25s; }
+.wwm-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.wwm-icon { font-size: 1.8rem; margin-bottom: 10px; }
+.wwm-card-title { font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.wwm-card-desc { font-size: .78rem; color: #999; line-height: 1.5; }
+.wwm-contact { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.wwm-email-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; background: rgba(255,255,255,.08); color: #fff; text-decoration: none; font-size: .88rem; font-weight: 600; border: 1px solid rgba(255,255,255,.15); transition: background .2s; }
+.wwm-email-btn:hover { background: rgba(255,255,255,.15); }
+.wwm-form-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px; background: var(--accent); color: #fff; text-decoration: none; font-size: .88rem; font-weight: 700; transition: opacity .2s, transform .2s; }
+.wwm-form-btn:hover { opacity: .88; transform: translateY(-1px); }
 </style>
 
 <div class="toast" id="toast"></div>
@@ -330,43 +348,6 @@ img { max-width: 100%; display: block; }
   </section>
 
   <!-- SEARCH BAR -->
-  <div class="search-bar-wrap">
-    <div class="search-bar" onclick="navigate('gallery')">
-      <div class="search-bar-icon">📷</div>
-      <div class="search-bar-text">
-        <div class="search-bar-title">금산의 하루</div>
-        <div class="search-bar-sub">사진 · 일상 · 골프 · 축제 기록 보기</div>
-      </div>
-      <div class="search-bar-arrow">→</div>
-    </div>
-  </div>
-
-  <!-- MAIN MENU -->
-  <div class="section section-alt" style="padding-top:28px;padding-bottom:28px;">
-    <div class="sec-label">바로가기</div>
-    <div class="sec-h" style="margin-bottom:16px;">주요 메뉴</div>
-    <div class="main-grid">
-      <div class="main-item" onclick="navigate('gallery')">
-        <div class="main-icon">📷</div>
-        <div class="main-name">금산의 하루</div>
-        <div class="main-desc">사진으로 담은 일상<br>골프·축제·맛집 기록</div>
-        <div class="main-arrow">갤러리 보기 →</div>
-      </div>
-      <div class="main-item" onclick="navigate('about')">
-        <div class="main-icon">🙋‍♂️</div>
-        <div class="main-name">About Me</div>
-        <div class="main-desc">프로필 & 최근 글<br>블로그 AlignUp.F↑</div>
-        <div class="main-arrow">소개 보기 →</div>
-      </div>
-      <div class="main-item" onclick="navigate('guestbook')">
-        <div class="main-icon">✍️</div>
-        <div class="main-name">방명록</div>
-        <div class="main-desc">방문 흔적을 남겨주세요<br>따뜻한 메시지 환영</div>
-        <div class="main-arrow">방명록 쓰기 →</div>
-      </div>
-    </div>
-  </div>
-
   <!-- FOOTER -->
   <footer class="section section-dark">
     <div class="footer-acc" id="footerAcc">
@@ -480,6 +461,33 @@ img { max-width: 100%; display: block; }
 
   <div style="text-align:center;margin-top:16px;">
     <a href="https://blog.naver.com/a840127" target="_blank" class="hero-cta-btn" style="display:inline-flex;background:#111;color:#fff;">네이버 블로그 보기 →</a>
+  </div>
+
+  <!-- Work With Me -->
+  <div class="wwm-section">
+    <div class="wwm-top-label">💼 Work With Me</div>
+    <h2 class="wwm-heading">강연 및 컨설팅 문의</h2>
+    <p class="wwm-sub">15년+ 현장 경영관리 &amp; 조직문화 구축 경험을 바탕으로<br>기업과 개인의 성장을 돕는 맞춤형 솔루션을 제공합니다.</p>
+    <div class="wwm-cards">
+      <div class="wwm-card">
+        <div class="wwm-icon">🏭</div>
+        <div class="wwm-card-title">Cost Innovation</div>
+        <div class="wwm-card-desc">제조업 경영관리 프로세스 구축 &amp; 원가혁신</div>
+      </div>
+      <div class="wwm-card">
+        <div class="wwm-icon">🤝</div>
+        <div class="wwm-card-title">조직문화 &amp; HR</div>
+        <div class="wwm-card-desc">소조직 리더십 캠프 &amp; HR 프로그램 기획</div>
+      </div>
+      <div class="wwm-card">
+        <div class="wwm-icon">🎯</div>
+        <div class="wwm-card-title">커리어 멘토링</div>
+        <div class="wwm-card-desc">잇다 멘토 &amp; 직무 상담 · 취업 전략</div>
+      </div>
+    </div>
+    <div class="wwm-contact">
+      <a href="mailto:kimjy0905@gmail.com" class="wwm-email-btn">✉️ kimjy0905@gmail.com</a>
+    </div>
   </div>
 </div>
 
