@@ -1329,5 +1329,136 @@ document.getElementById('gbBtn').addEventListener('click', () => {
 </script>
 <!-- cache bust 2026-10-11 13:13:57 KST -->
 
+<!-- BGM : 직접 합성한 오리지널 Lo-fi 루프 (외부 음원·샘플 없음 → 저작권 이슈 없음) -->
+<button class="bgm-btn" id="bgmBtn" type="button" aria-label="배경음악 재생" aria-pressed="false" title="BGM">
+  <span class="bgm-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span class="bgm-label">BGM</span>
+</button>
+<style>
+.bgm-btn { position: fixed; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 900; display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 12px; background: #111; color: #fff; border: 1px solid rgba(255,255,255,.14); border-radius: 19px; font: 700 11px/1 inherit; letter-spacing: .1em; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.28); transition: background .15s, border-color .15s; -webkit-tap-highlight-color: transparent; }
+.bgm-btn:hover { border-color: var(--accent); }
+.bgm-btn[aria-pressed="true"] { border-color: var(--accent); }
+.bgm-eq { display: flex; align-items: flex-end; gap: 2px; width: 16px; height: 14px; }
+.bgm-eq i { flex: 1; height: 3px; background: #777; border-radius: 1px; transition: background .15s; }
+.bgm-btn[aria-pressed="true"] .bgm-eq i { background: var(--accent); animation: bgmEq 1s ease-in-out infinite; }
+.bgm-btn[aria-pressed="true"] .bgm-eq i:nth-child(2) { animation-delay: -.3s; }
+.bgm-btn[aria-pressed="true"] .bgm-eq i:nth-child(3) { animation-delay: -.6s; }
+.bgm-btn[aria-pressed="true"] .bgm-eq i:nth-child(4) { animation-delay: -.15s; }
+@keyframes bgmEq { 0%,100% { height: 3px; } 50% { height: 14px; } }
+@media (prefers-reduced-motion: reduce) { .bgm-btn[aria-pressed="true"] .bgm-eq i { animation: none; height: 9px; } }
+@media (max-width: 480px) { .bgm-label { display: none; } .bgm-btn { padding: 0 12px; } }
+</style>
+<script>
+(function () {
+  const BPM = 76, BEAT = 60 / BPM, BAR = BEAT * 4, SWING = 0.16;
+  // Cmaj9 – Am9 – Dm9 – G13  (lo-fi 정석 진행)
+  const CHORDS = [
+    { root: 36, notes: [52, 55, 59, 62, 64] },
+    { root: 33, notes: [48, 55, 59, 60, 64] },
+    { root: 38, notes: [53, 57, 60, 64, 67] },
+    { root: 31, notes: [53, 57, 59, 64, 69] }
+  ];
+  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+
+  function noiseBuf(ctx, sec) {
+    const b = ctx.createBuffer(1, Math.floor(ctx.sampleRate * sec), ctx.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    return b;
+  }
+  function env(g, t, a, peak, r) {
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(peak, t + a);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + a + r);
+  }
+  function keys(ctx, out, t, notes, dur) {            // 따뜻한 로즈 느낌 코드
+    notes.forEach((n, i) => {
+      [0, 1].forEach(k => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = k ? 'sine' : 'triangle';
+        o.frequency.value = mtof(n); o.detune.value = (k ? 6 : -5) + i * 0.6;
+        env(g, t + i * 0.018, 0.04, 0.05, dur);
+        o.connect(g); g.connect(out); o.start(t); o.stop(t + dur + 0.2);
+      });
+    });
+  }
+  function bass(ctx, out, t, note, dur) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = mtof(note);
+    env(g, t, 0.02, 0.28, dur); o.connect(g); g.connect(out); o.start(t); o.stop(t + dur + 0.1);
+  }
+  function kick(ctx, out, t, v) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(42, t + 0.12);
+    env(g, t, 0.003, 0.7 * v, 0.28); o.connect(g); g.connect(out); o.start(t); o.stop(t + 0.35);
+  }
+  function noiseHit(ctx, out, t, nb, type, freq, peak, rel) {
+    const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+    s.buffer = nb; f.type = type; f.frequency.value = freq;
+    env(g, t, 0.002, peak, rel); s.connect(f); f.connect(g); g.connect(out); s.start(t, Math.random() * 0.5); s.stop(t + rel + 0.05);
+  }
+  // 한 마디(4박)를 t0부터 예약
+  function scheduleBar(ctx, out, t0, bar, nb) {
+    const c = CHORDS[bar % 4], sw = i => (i % 2 ? SWING * BEAT / 2 : 0), S = BEAT / 2;
+    keys(ctx, out, t0, c.notes, BAR * 0.95);
+    bass(ctx, out, t0, c.root, BEAT * 1.6);
+    bass(ctx, out, t0 + BEAT * 2.5 + sw(5), c.root + (bar % 2 ? 7 : 0), BEAT * 1.2);
+    kick(ctx, out, t0, 1); kick(ctx, out, t0 + BEAT * 1.5 + sw(3), 0.7); kick(ctx, out, t0 + BEAT * 2.5 + sw(5), 0.85);
+    noiseHit(ctx, out, t0 + BEAT, nb, 'bandpass', 1900, 0.2, 0.18);
+    noiseHit(ctx, out, t0 + BEAT * 3, nb, 'bandpass', 1900, 0.22, 0.2);
+    for (let i = 0; i < 8; i++) noiseHit(ctx, out, t0 + i * S + sw(i), nb, 'highpass', 7500, i % 2 ? 0.05 : 0.08, 0.05);
+    // 가끔 올라오는 멜로디 한 음
+    if (bar % 2 === 1) {
+      const pent = [72, 74, 76, 79, 81], n = pent[(bar * 3 + 1) % 5], o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = mtof(n);
+      env(g, t0 + BEAT * 3.5, 0.02, 0.07, 0.9); o.connect(g); g.connect(out); o.start(t0 + BEAT * 3.5); o.stop(t0 + BEAT * 3.5 + 1);
+    }
+  }
+  // 레코드 먼지 소리
+  function crackle(ctx, out, t, nb) { for (let i = 0; i < 6; i++) noiseHit(ctx, out, t + Math.random() * BAR, nb, 'highpass', 3000, 0.04 * Math.random(), 0.012); }
+  window.__bgm = { scheduleBar, noiseBuf, BAR };
+
+  const btn = document.getElementById('bgmBtn');
+  let ctx = null, master = null, nb = null, timer = null, nextT = 0, bar = 0, on = false;
+
+  function build() {
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = 0;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3200; lp.Q.value = 0.4;
+    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3;
+    master.connect(lp); lp.connect(comp); comp.connect(ctx.destination);
+    nb = noiseBuf(ctx, 1);
+    return true;
+  }
+  function pump() { while (nextT < ctx.currentTime + 1.2) { scheduleBar(ctx, master, nextT, bar, nb); crackle(ctx, master, nextT, nb); nextT += BAR; bar++; } }
+  async function start() {
+    if (!ctx && !build()) return;
+    await ctx.resume();
+    nextT = ctx.currentTime + 0.1; bar = 0; pump();
+    timer = setInterval(pump, 400);
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+    master.gain.linearRampToValueAtTime(0.14, ctx.currentTime + 2);
+    on = true; paint();
+  }
+  function stop() {
+    if (!ctx) return;
+    clearInterval(timer); timer = null;
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+    master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.6);
+    setTimeout(() => { if (!on && ctx) ctx.suspend(); }, 700);
+    on = false; paint();
+  }
+  function paint() { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.setAttribute('aria-label', on ? '배경음악 끄기' : '배경음악 재생'); }
+  btn.addEventListener('click', () => { on ? stop() : start(); try { localStorage.setItem('bgm', on ? '1' : '0'); } catch (e) {} });
+  // 탭이 백그라운드로 가면 일시정지, 돌아오면 이어서
+  document.addEventListener('visibilitychange', () => {
+    if (!ctx || !on) return;
+    if (document.hidden) ctx.suspend(); else ctx.resume();
+  });
+})();
+</script>
+
 </body>
 </html>
