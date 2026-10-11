@@ -17,7 +17,7 @@
   --bg: #ffffff;
   --bg2: #f5f5f5;
   --nav-h: 56px;
-  --accent: #DB5200;
+  --accent: #FC6A10;
   --fg: #111111;
   --fg2: #555555;
   --fg3: #999999;
@@ -111,7 +111,7 @@ img { max-width: 100%; display: block; }
 .hero-typo-stage b { font-weight: 700; }
 .hero-typo-caret {
   display: inline-block; width: 3px; height: .86em; margin-left: 5px; border-radius: 2px;
-  background: var(--accent); box-shadow: 0 0 14px rgba(219,82,0,.8);
+  background: var(--accent); box-shadow: 0 0 14px rgba(252,106,16,.8);
   animation: typoCaret 1s steps(1) infinite; transform: translateY(.04em);
 }
 .hero-typo-stage.is-typing .hero-typo-caret { animation: none; opacity: 1; }
@@ -139,7 +139,7 @@ img { max-width: 100%; display: block; }
 }
 .hero-typo-rule i {
   position: absolute; inset: 0 auto 0 0; width: 0%; border-radius: 999px;
-  background: linear-gradient(90deg, rgba(219,82,0,.4) 0%, var(--accent) 100%);
+  background: linear-gradient(90deg, rgba(252,106,16,.4) 0%, var(--accent) 100%);
   transition: width .35s linear;
 }
 .hero-typo-index {
@@ -246,7 +246,7 @@ img { max-width: 100%; display: block; }
 }
 .about-hero::before {
   content: ''; position: absolute; inset: 0; z-index: 1;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23DB5200' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FC6A10' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   pointer-events: none;
 }
 .about-hero-content {
@@ -256,8 +256,8 @@ img { max-width: 100%; display: block; }
 }
 .about-speaker-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(219,82,0,.22); border: 1px solid rgba(219,82,0,.5);
-  color: #FFA366; font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  background: rgba(252,106,16,.22); border: 1px solid rgba(252,106,16,.5);
+  color: #FFB27A; font-size: 11px; font-weight: 700; letter-spacing: .08em;
   padding: 4px 10px; border-radius: 20px; width: fit-content; margin-bottom: 14px;
   backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
 }
@@ -266,13 +266,13 @@ img { max-width: 100%; display: block; }
   font-size: 2rem; font-weight: 900; line-height: 1.1; margin-bottom: 6px;
   letter-spacing: -.02em; text-shadow: 0 2px 12px rgba(0,0,0,.5);
 }
-.about-hero-name em { color: #FF7A29; font-style: normal; }
+.about-hero-name em { color: #FF8A3D; font-style: normal; }
 .about-hero-role {
   font-size: .9rem; color: rgba(255,255,255,.75); line-height: 1.6;
   margin-bottom: 18px; font-weight: 400; text-shadow: 0 1px 8px rgba(0,0,0,.6);
 }
 .about-hero-divider {
-  width: 36px; height: 3px; background: #DB5200;
+  width: 36px; height: 3px; background: #FC6A10;
   border-radius: 2px; margin-bottom: 16px;
 }
 .about-hero-tagline {
@@ -402,10 +402,10 @@ img { max-width: 100%; display: block; }
   overflow: hidden; transition: transform .15s, border-color .15s;
 }
 .lec-deck::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #DB5200;
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #FC6A10;
 }
-.lec-deck:hover, .lec-deck:focus-visible { transform: translateY(-2px); border-color: #DB5200; }
-.lec-deck-no { font-size: 10px; font-weight: 700; color: #DB5200; letter-spacing: .1em; margin-bottom: 7px; }
+.lec-deck:hover, .lec-deck:focus-visible { transform: translateY(-2px); border-color: #FC6A10; }
+.lec-deck-no { font-size: 10px; font-weight: 700; color: #FC6A10; letter-spacing: .1em; margin-bottom: 7px; }
 .lec-deck-title {
   font-size: clamp(11px, 3.1vw, 13px); font-weight: 700; line-height: 1.35; color: #fff;
   word-break: keep-all; overflow-wrap: anywhere; margin-bottom: 6px;
@@ -445,7 +445,7 @@ img { max-width: 100%; display: block; }
   font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 6px;
   cursor: pointer; font-family: inherit; white-space: nowrap;
 }
-.lec-modal-btn:hover { border-color: #DB5200; background: rgba(219,82,0,.2); }
+.lec-modal-btn:hover { border-color: #FC6A10; background: rgba(252,106,16,.2); }
 .lec-modal-stage { flex: 1 1 auto; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .lec-modal-stage img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 .lec-arrow {
@@ -463,7 +463,7 @@ img { max-width: 100%; display: block; }
   padding: 10px 14px calc(12px + env(safe-area-inset-bottom, 0px));
 }
 .lec-bar { height: 3px; background: #333; border-radius: 2px; overflow: hidden; }
-.lec-bar-fill { height: 100%; background: #DB5200; width: 0; transition: width .2s; }
+.lec-bar-fill { height: 100%; background: #FC6A10; width: 0; transition: width .2s; }
 @media (orientation: landscape) and (max-height: 520px) {
   .lec-modal-foot { display: none; }
   .lec-modal-bar { padding-top: calc(6px + env(safe-area-inset-top, 0px)); padding-bottom: 6px; }
@@ -518,7 +518,7 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; gap: 10px;
 }
 .lecture-banner-tag {
-  background: #DB5200; color: #fff; font-size: 11px; font-weight: 700;
+  background: #FC6A10; color: #fff; font-size: 11px; font-weight: 700;
   padding: 3px 8px; border-radius: 4px; white-space: nowrap;
 }
 .lecture-banner-caption strong {
@@ -534,7 +534,7 @@ img { max-width: 100%; display: block; }
 <!-- MAIN NAV -->
 <nav class="main-nav">
   <div class="nav-logo" onclick="navigate('home')">
-    <div class="nav-logo-main"><span>Pe</span>Connecton</div>
+    <div class="nav-logo-main" aria-label="PeConnecton">PeC<span>o</span>nnect<span>o</span>n</div>
     <div class="nav-logo-sub">김진영 · driving life</div>
   </div>
   <div class="nav-links">
@@ -567,7 +567,7 @@ img { max-width: 100%; display: block; }
     <div class="hero-slides" id="heroSlides">
       <div class="hero-slide">
         <div class="hero-bg" style="background:linear-gradient(160deg,#0d1117 0%,#1a2035 40%,#0a0f1e 100%)">
-          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(219,82,0,.2),transparent 60%)"></div>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(252,106,16,.2),transparent 60%)"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -579,7 +579,7 @@ img { max-width: 100%; display: block; }
       </div>
       <div class="hero-slide">
         <div class="hero-bg" style="background:linear-gradient(160deg,#111 0%,#2A1403 50%,#1a0a08 100%)">
-          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(219,82,0,.28),transparent 55%)"></div>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(252,106,16,.28),transparent 55%)"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -1242,7 +1242,7 @@ document.getElementById('gbBtn').addEventListener('click', () => {
   const name = document.getElementById('gbName').value.trim() || '익명';
   const msg = document.getElementById('gbMsg').value.trim();
   if (!msg) { showToast('메시지를 입력해주세요'); return; }
-  const colors = ['#2f54eb','#722ed1','#17a750','#d48806','#DB5200'];
+  const colors = ['#2f54eb','#722ed1','#17a750','#d48806','#FC6A10'];
   gbEntries.unshift({ name, color: colors[Math.floor(Math.random()*colors.length)], date: new Date().toLocaleDateString('ko-KR'), msg });
   document.getElementById('gbName').value = '';
   document.getElementById('gbPwd').value = '';
