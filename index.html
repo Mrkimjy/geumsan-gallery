@@ -313,6 +313,20 @@ img { max-width: 100%; display: block; }
 .blog-title-h { font-size: 13px; font-weight: 700; line-height: 1.4; margin-bottom: 2px; }
 .blog-date-h { font-size: 10px; color: var(--fg3); margin-top: 4px; }
 
+/* APPS */
+.app-card { display: flex; gap: 14px; align-items: flex-start; border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 16px; }
+.app-icon { width: 56px; height: 56px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; background: #1A0C00; border-radius: 2px; }
+.app-body { flex: 1; min-width: 0; }
+.app-name { font-size: 17px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 3px; }
+.app-desc { font-size: 12px; color: var(--fg2); margin-bottom: 12px; }
+.app-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.app-btn { display: inline-flex; align-items: center; background: #111; color: #fff; padding: 9px 16px; border-radius: 2px; font-size: 12px; font-weight: 700; border: 1px solid #111; transition: background .15s, border-color .15s; }
+.app-btn:hover { background: var(--accent); border-color: var(--accent); }
+.app-btn.ghost { background: transparent; color: var(--fg1, #111); border-color: var(--border); }
+.app-btn.ghost:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
+.app-note { margin-top: 12px; font-size: 11px; color: var(--fg3); line-height: 1.6; }
+.app-mail { user-select: all; color: var(--fg2); font-weight: 600; }
+
 /* NEWS PAGE */
 .news-section-label { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 12px; display: flex; align-items: center; gap: 6px; }
 .news-section-label::before { content: ''; width: 3px; height: 14px; background: var(--accent); display: inline-block; border-radius: 2px; }
@@ -550,6 +564,7 @@ img { max-width: 100%; display: block; }
     <div class="nav-link" onclick="navigate('gallery')">Photography</div>
     <div class="nav-link" onclick="navigate('about')">About Me</div>
     <div class="nav-link" onclick="navigate('news')">News</div>
+    <div class="nav-link" onclick="navigate('apps')">Apps</div>
   </div>
   <div class="nav-right">
     <div class="nav-cta" onclick="navigate('guestbook')">✍️ 방명록</div>
@@ -565,6 +580,7 @@ img { max-width: 100%; display: block; }
   <div class="mobile-nav-item" onclick="navigate('gallery')">Photography <span>›</span></div>
   <div class="mobile-nav-item" onclick="navigate('about')">About Me <span>›</span></div>
   <div class="mobile-nav-item" onclick="navigate('news')">News <span>›</span></div>
+  <div class="mobile-nav-item" onclick="navigate('apps')">Apps <span>›</span></div>
   <div class="mobile-nav-item" onclick="navigate('guestbook')">방명록 <span>›</span></div>
 </div>
 
@@ -636,6 +652,7 @@ img { max-width: 100%; display: block; }
           <a class="footer-acc-link" href="#" onclick="navigate('gallery');return false">Photography</a>
           <a class="footer-acc-link" href="#" onclick="navigate('about');return false">About Me</a>
           <a class="footer-acc-link" href="#" onclick="navigate('news');return false">News</a>
+          <a class="footer-acc-link" href="#" onclick="navigate('apps');return false">Apps</a>
           <a class="footer-acc-link" href="#" onclick="navigate('guestbook');return false">방명록</a>
         </div>
       </div>
@@ -747,7 +764,7 @@ img { max-width: 100%; display: block; }
     <div class="lec-decks" id="lecDecks"></div>
   </div>
 
-  <div class="recent-blog-title">📝 최근 글</div>
+  <div class="news-section-label" style="margin-top:28px;">최근 글 · Blog</div>
   <div id="aboutBlogList"></div>
 
   <div style="text-align:center;margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
@@ -805,6 +822,26 @@ img { max-width: 100%; display: block; }
   <div id="newsEcon"></div>
 </div>
 
+<!-- APPS -->
+<div class="page-wrap" id="page-apps">
+  <div class="page-title">Apps</div>
+  <div class="page-sub">직접 만든 앱 · 다운로드는 요청 후 승인해 드립니다</div>
+
+  <div class="news-section-label">내가 만든 앱</div>
+  <div class="app-card">
+    <div class="app-icon" aria-hidden="true">📜</div>
+    <div class="app-body">
+      <div class="app-name">역사가 쑥쑥</div>
+      <div class="app-desc">직접 만든 역사 학습 웹앱</div>
+      <div class="app-actions">
+        <a class="app-btn" id="appReqBtn" href="#">다운로드 요청</a>
+        <a class="app-btn ghost" href="https://ig.me/m/peconnet_on" target="_blank" rel="noopener">인스타 DM으로 요청</a>
+      </div>
+      <div class="app-note">요청을 보내주시면 확인 후 링크를 직접 전달해 드립니다.<br>요청 메일: <span class="app-mail">kimjy0905@gmail.com</span></div>
+    </div>
+  </div>
+</div>
+
 <!-- GUESTBOOK -->
 <div class="page-wrap" id="page-guestbook">
   <div class="page-title">방명록 ✍️</div>
@@ -832,7 +869,7 @@ function showToast(msg) {
 }
 
 // Navigation
-const pages = ['gallery','about','news','guestbook'];
+const pages = ['gallery','about','news','apps','guestbook'];
 function navigate(id) {
   const hw = document.getElementById('homeWrap');
   const mm = document.getElementById('mobileMenu');
@@ -1170,20 +1207,24 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbMove(1);
 });
 
-// ── BLOG DATA ──
-const blogPosts = [
-  { cat:'HR·조직문화', emoji:'🏢', bg:'linear-gradient(135deg,#2f54eb15,#722ed115)', title:'소조직 멘토링, 왜 중요한가?', date:'2026.10.05', read:'5분' },
-  { cat:'재테크', emoji:'💰', bg:'linear-gradient(135deg,#d4880615,#17a75015)', title:'직장인 연금저축 활용법 A to Z', date:'2026.09.28', read:'7분' },
-  { cat:'골프', emoji:'⛳', bg:'linear-gradient(135deg,#17a75015,#2f54eb15)', title:'골프 입문 6개월 후기', date:'2026.09.20', read:'4분' },
-  { cat:'일상·금산', emoji:'🌿', bg:'linear-gradient(135deg,#17a75015,#d4880615)', title:'금산 인삼 축제 방문기 🎪', date:'2026.10.10', read:'3분' },
-];
-const aboutBlogList = document.getElementById('aboutBlogList');
-blogPosts.forEach(p => {
-  const el = document.createElement('div'); el.className = 'blog-card-h';
-  el.innerHTML = `<div class="blog-thumb-h" style="background:${p.bg}">${p.emoji}</div><div style="flex:1;min-width:0;"><div class="blog-cat-h">${p.cat}</div><div class="blog-title-h">${p.title}</div><div class="blog-date-h">${p.date} · ${p.read} 읽기</div></div>`;
-  el.addEventListener('click', () => window.open('https://blog.naver.com/a840127', '_blank'));
-  aboutBlogList.appendChild(el);
-});
+// ── BLOG (최근 글 2개 · blog.json — GitHub Actions가 매일 갱신) ──
+(async function () {
+  const box = document.getElementById('aboutBlogList');
+  try {
+    const r = await fetch('blog.json?t=' + Date.now(), { cache: 'no-store' });
+    const d = await r.json();
+    const list = (d.posts || []).slice(0, 2);
+    if (!list.length) throw new Error('empty');
+    list.forEach(p => {
+      const a = document.createElement('a'); a.className = 'news-card';
+      a.href = p.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = '<div class="news-body"><div class="news-source">네이버 블로그<span class="news-date">' + esc(p.date) + '</span></div><div class="news-headline" style="margin-bottom:0">' + esc(p.title) + '</div></div>';
+      box.appendChild(a);
+    });
+  } catch (e) {
+    box.innerHTML = '<div class="news-empty">최근 글은 네이버 블로그에서 확인해 주세요.</div>';
+  }
+})();
 
 // ── NEWS ── (데이터는 news.json — GitHub Actions가 매일 08:00 KST 자동 갱신)
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -1217,6 +1258,7 @@ async function loadNews(manual) {
     if (manual) showToast('뉴스를 불러오지 못했습니다');
   }
 }
+document.getElementById('appReqBtn').href = 'mailto:kimjy0905@gmail.com?subject=' + encodeURIComponent('[역사가 쑥쑥] 다운로드 요청') + '&body=' + encodeURIComponent('이름/소속:\n사용 목적:\n');
 document.getElementById('newsRefreshBtn').addEventListener('click', () => loadNews(true));
 loadNews(false);
 

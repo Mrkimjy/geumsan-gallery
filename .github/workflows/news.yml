@@ -24,16 +24,21 @@ jobs:
 
       - name: Update news
         run: python scripts/update_news.py
+        continue-on-error: true
+
+      - name: Update blog posts
+        run: python scripts/update_blog.py
+        continue-on-error: true
 
       - name: Commit and push
         run: |
-          if [ -z "$(git status --porcelain news.json)" ]; then
+          if [ -z "$(git status --porcelain news.json blog.json)" ]; then
             echo "no change"
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add news.json
+          git add -A news.json blog.json
           git commit -m "chore(news): auto update $(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M KST')"
           git pull --rebase origin main
           git push
