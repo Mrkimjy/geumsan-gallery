@@ -309,15 +309,17 @@ img { max-width: 100%; display: block; }
 /* NEWS PAGE */
 .news-section-label { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 12px; display: flex; align-items: center; gap: 6px; }
 .news-section-label::before { content: ''; width: 3px; height: 14px; background: var(--accent); display: inline-block; border-radius: 2px; }
-.news-card { border: 1px solid var(--border); padding: 14px; margin-bottom: 8px; cursor: pointer; transition: border-color .15s; }
-.news-card:hover { border-color: var(--accent); }
-.news-card-top { display: flex; align-items: flex-start; gap: 12px; }
-.news-thumb { width: 70px; height: 56px; border-radius: 2px; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 26px; }
-.news-source { font-size: 10px; color: var(--fg3); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
-.news-headline { font-size: 13px; font-weight: 700; line-height: 1.4; margin-bottom: 3px; }
-.news-summary { font-size: 11px; color: var(--fg2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.news-date { font-size: 10px; color: var(--fg3); margin-top: 8px; }
-.news-refresh-btn { display: flex; align-items: center; gap: 6px; background: #111; color: #fff; padding: 9px 16px; border-radius: 2px; font-size: 12px; font-weight: 700; cursor: pointer; transition: background .15s; width: fit-content; margin-bottom: 16px; }
+.news-card { display: flex; align-items: flex-start; gap: 12px; border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 13px 14px; margin-bottom: 8px; cursor: pointer; color: inherit; text-decoration: none; transition: border-color .15s, background .15s; }
+.news-card:hover { border-color: var(--accent); background: rgba(252,106,16,.05); }
+.news-thumb { width: 46px; height: 46px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; background: #1A0C00; border-radius: 2px; }
+.news-body { flex: 1; min-width: 0; }
+.news-source { font-size: 10px; color: var(--fg3); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.news-headline { font-size: 14px; font-weight: 700; line-height: 1.4; margin-bottom: 4px; word-break: keep-all; }
+.news-card:hover .news-headline { color: var(--accent); }
+.news-summary { font-size: 11.5px; color: var(--fg2); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.news-date { font-size: 10px; color: var(--fg3); font-weight: 500; letter-spacing: 0; margin-left: auto; }
+.news-empty { font-size: 12px; color: var(--fg3); padding: 14px 0; }
+.news-refresh-btn { display: flex; align-items: center; gap: 6px; background: #111; color: #fff; padding: 9px 16px; border-radius: 2px; font-size: 12px; font-weight: 700; cursor: pointer; border: 0; transition: background .15s; }
 .news-refresh-btn:hover { background: var(--accent); }
 .news-badge { background: var(--accent); color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 2px; }
 
@@ -782,7 +784,7 @@ img { max-width: 100%; display: block; }
   <div class="page-title">News 📰</div>
   <div class="page-sub">HR · 경영 · 타이어산업 · 재테크 최신 뉴스</div>
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
-    <button class="news-refresh-btn" id="newsRefreshBtn">🔄 새로고침</button>
+    <button class="news-refresh-btn" id="newsRefreshBtn">↻ 새로고침</button>
     <span style="font-size:11px;color:var(--fg3);" id="newsUpdateTime">업데이트: -</span>
   </div>
 
@@ -1176,51 +1178,40 @@ blogPosts.forEach(p => {
   aboutBlogList.appendChild(el);
 });
 
-// ── NEWS DATA ──
-// <!--NEWS:START--> 이 블록은 GitHub Actions가 매일 자동 갱신합니다. 직접 수정 시 다음 실행에 덮어써집니다.
-const newsData = {
-  HR: [
-    { emoji:'📊', bg:'#e8f0fe', source:'HR Insight', headline:'2026년 국내 기업 직원 몰입도 조사 결과 발표', summary:'국내 주요 기업 1,200개사 대상 직원 몰입도 조사에서 소조직 단위 소통 강화 기업이 평균 23% 높은 몰입도를 보였습니다.', date:'2026.10.09', isNew:true },
-    { emoji:'👥', bg:'#f3e8ff', source:'HR Korea', headline:'MZ세대 리더십 트렌드: 수평적 소통이 핵심', summary:'2026년 직장 내 리더십 트렌드 보고서에 따르면 MZ세대 직원들은 수평적 소통과 즉각적 피드백을 가장 중요한 리더십 요소로 꼽았습니다.', date:'2026.10.08', isNew:true },
-    { emoji:'🎓', bg:'#fef3c7', source:'월간 인사관리', headline:'직장 내 멘토링 프로그램 효과 연구 결과', summary:'멘토링 프로그램을 운영하는 기업의 신입사원 1년 이내 이직률이 평균 31% 낮은 것으로 나타났습니다.', date:'2026.10.06', isNew:false },
-  ],
-  Tire: [
-    { emoji:'🚗', bg:'#dcfce7', source:'AutoNews', headline:'한국타이어, 2026 EV 전용 타이어 신제품 출시', summary:'한국타이어앤테크놀로지가 전기차 전용 고성능 타이어 신라인업을 발표했습니다. 주행거리 연장과 소음 저감에 초점을 맞춘 제품입니다.', date:'2026.10.10', isNew:true },
-    { emoji:'⚡', bg:'#fef3c7', source:'Electric Vehicle', headline:'글로벌 EV 판매량 2026년 3분기 사상 최대', summary:'전세계 전기차 판매량이 2026년 3분기에 분기 기준 최초로 500만대를 돌파했습니다. 타이어 산업에도 EV 전용 제품 수요가 급증하고 있습니다.', date:'2026.10.07', isNew:false },
-  ],
-  Econ: [
-    { emoji:'💹', bg:'#dcfce7', source:'한국경제', headline:'IRP·연금저축 세액공제 한도 2027년 확대 검토', summary:'정부가 개인형 퇴직연금(IRP)과 연금저축펀드의 세액공제 한도를 현행 900만원에서 1,200만원으로 확대하는 방안을 검토 중인 것으로 알려졌습니다.', date:'2026.10.09', isNew:true },
-    { emoji:'🏦', bg:'#e8f0fe', source:'조선일보', headline:'코스피 2,800선 회복… 반도체·2차전지 주도', summary:'코스피 지수가 외국인 매수세에 힘입어 2,800선을 탈환했습니다. 반도체와 2차전지 업종이 상승세를 이끌었습니다.', date:'2026.10.10', isNew:true },
-    { emoji:'🏠', bg:'#fef3c7', source:'부동산114', headline:'지방 중소도시 아파트 거래량 3개월 연속 증가', summary:'충남·충북 등 지방 중소도시 아파트 거래량이 3개월 연속 증가세를 보이고 있습니다. 금리 인하 기대감과 실수요 증가가 주요 요인으로 분석됩니다.', date:'2026.10.08', isNew:false },
-  ]
-};
-// <!--NEWS:END-->
+// ── NEWS ── (데이터는 news.json — GitHub Actions가 매일 08:00 KST 자동 갱신)
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function renderNews(containerId, list) {
   const el = document.getElementById(containerId); el.innerHTML = '';
+  if (!list || !list.length) { el.innerHTML = '<div class="news-empty">표시할 뉴스가 없습니다.</div>'; return; }
   list.forEach(n => {
-    const card = document.createElement('div'); card.className = 'news-card';
+    const card = document.createElement('a'); card.className = 'news-card';
+    card.href = n.url || '#'; card.target = '_blank'; card.rel = 'noopener';
     card.innerHTML = `
-      <div class="news-card-top">
-        <div class="news-thumb" style="background:${n.bg}">${n.emoji}</div>
-        <div style="flex:1;min-width:0;">
-          <div class="news-source">${n.source} ${n.isNew ? '<span class="news-badge">NEW</span>' : ''}</div>
-          <div class="news-headline">${n.headline}</div>
-          <div class="news-summary">${n.summary}</div>
-        </div>
-      </div>
-      <div class="news-date">${n.date}</div>`;
-    card.addEventListener('click', () => { if (n.url) { window.open(n.url, '_blank', 'noopener'); } else { showToast('외부 뉴스 링크로 이동 →'); } });
+      <div class="news-thumb">${esc(n.emoji)}</div>
+      <div class="news-body">
+        <div class="news-source">${esc(n.source)} ${n.isNew ? '<span class="news-badge">NEW</span>' : ''}<span class="news-date">${esc(n.date)}</span></div>
+        <div class="news-headline">${esc(n.headline)}</div>
+        <div class="news-summary">${esc(n.summary)}</div>
+      </div>`;
     el.appendChild(card);
   });
 }
-if (newsData.updated) document.getElementById('newsUpdateTime').textContent = '업데이트: ' + newsData.updated;
-renderNews('newsHR', newsData.HR);
-renderNews('newsTire', newsData.Tire);
-renderNews('newsEcon', newsData.Econ);
-document.getElementById('newsRefreshBtn').addEventListener('click', () => {
-  document.getElementById('newsUpdateTime').textContent = '업데이트: ' + new Date().toLocaleDateString('ko-KR') + ' ' + new Date().toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'});
-  showToast('뉴스를 새로고침했습니다 ✅');
-});
+async function loadNews(manual) {
+  const t = document.getElementById('newsUpdateTime');
+  try {
+    const r = await fetch('news.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    t.textContent = '업데이트 ' + (d.updated || '-') + ' · 매일 08:00 자동 갱신';
+    renderNews('newsHR', d.HR); renderNews('newsTire', d.Tire); renderNews('newsEcon', d.Econ);
+    if (manual) showToast('최신 뉴스를 불러왔습니다');
+  } catch (e) {
+    t.textContent = '뉴스를 불러오지 못했습니다';
+    if (manual) showToast('뉴스를 불러오지 못했습니다');
+  }
+}
+document.getElementById('newsRefreshBtn').addEventListener('click', () => loadNews(true));
+loadNews(false);
 
 // ── GUESTBOOK ──
 const gbEntries = [

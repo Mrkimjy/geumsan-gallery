@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-김진영 Space — 뉴스 자동 수집/갱신 스크립트
-index.html 안의 NEWS:START ~ NEWS:END 블록만 교체한다.
+PeConnecton — 뉴스 자동 수집/갱신 스크립트
+news.json 파일만 갱신한다. (index.html은 건드리지 않음 → 수동 업로드와 충돌 없음)
 외부 라이브러리·API 키 없이 표준 라이브러리만 사용.
 
 1순위: 언론사 공식 RSS (원문 URL + 실제 기사 요약이 들어있음)
@@ -22,9 +22,9 @@ from xml.etree import ElementTree as ET
 
 KST = timezone(timedelta(hours=9))
 NOW = datetime.now(KST)
-TARGET = os.environ.get("NEWS_TARGET", "index.html")
+TARGET = os.environ.get("NEWS_TARGET", "news.json")
 PER_CATEGORY = 3
-MAX_AGE_DAYS = 5
+MAX_AGE_DAYS = 4
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
@@ -41,39 +41,56 @@ FEEDS = [
 # ── 카테고리 정의 ────────────────────────────────────────────────
 CATEGORIES = {
     "HR": {
-        "include": r"(조직문화|기업문화|정기인사|임원인사|인사제도|채용|구인|이직|퇴사|리더십|인재|임금|연봉|노사|노조|파업|복지|근로|정년|주4일|워라밸|직장|사내문화|교육훈련|승진|인사평가|일자리|고용|HR)",
-        "exclude": r"(연예|스포츠|야구|축구|변호사|검찰|소송|구속)",
-        "gnews": [
-            '조직문화 OR 기업문화 OR 인사제도 when:4d',
-            '리더십 OR 인재육성 OR "일하는 방식" 직장 when:4d',
-            '채용 OR 이직 OR 정년연장 when:4d',
+        # (정규식, 가중치) — 제목에 걸린 가중치 합이 높을수록 우선. MIN_SCORE 미만은 제외
+        "weights": [
+            (r"조직문화|기업문화|사내문화|일하는 방식", 10),
+            (r"리더십|세대|MZ|꼰대|소통", 8),
+            (r"인사제도|인사평가|승진|성과급|임금체계|정년|주4일|주 4일|근로시간|워라밸", 7),
+            (r"채용|신입|공채|이직|퇴사|인재|교육훈련|HR", 5),
+            (r"노사|노조|임단협|파업|임금협상|복지", 4),
+            (r"직장|근로|일자리|고용", 2),
         ],
-        "emoji": ["📊", "👥", "🎓", "🤝", "💼"],
-        "bg": ["#e8f0fe", "#f3e8ff", "#fef3c7", "#e0f2fe", "#fce7f3"],
+        "exclude": r"(연예|스포츠|야구|축구|변호사|검찰|소송|구속|건설 임시|일용직|코스피|부동산)",
+        "gnews": [
+            '조직문화 OR 기업문화 OR 세대갈등 when:4d',
+            '리더십 OR 인사제도 OR 성과급 when:4d',
+            '채용 OR 정년연장 OR 주4일제 when:4d',
+        ],
+        "emoji": ["👥", "🤝", "🎓", "📋", "💼"],
     },
     "Tire": {
-        "include": r"(타이어|한국타이어|금호타이어|넥센타이어|완성차|자동차|현대차|기아|르노코리아|KG모빌리티|전기차|하이브리드|모빌리티|자동차부품|車)",
-        "exclude": r"(반도체|HBM|메모리|디스플레이|배터리 소재|조선|방산|연예|스포츠)",
+        "weights": [
+            (r"한국타이어|금호타이어|넥센타이어|한온시스템", 14),
+            (r"타이어", 12),
+            (r"자동차부품|부품사|완성차|현대차|기아|현대모비스|르노코리아|KG모빌리티|GM", 4),
+            (r"전기차|하이브리드|모빌리티|수소차|자율주행", 4),
+            (r"자동차|車|차량|관세|수출", 2),
+        ],
+        "exclude": r"(반도체|HBM|메모리|디스플레이|배터리 소재|조선|방산|연예|스포츠|시승기|출시 행사|할인)",
         "gnews": [
             '한국타이어 OR 금호타이어 OR 넥센타이어 when:5d',
-            '타이어 공장 OR 수출 OR 전기차용 when:5d',
-            '완성차 OR 자동차부품 산업 when:3d',
+            '타이어 산업 OR 타이어 수출 OR 전기차용 타이어 when:5d',
+            '자동차부품 OR 완성차 관세 when:3d',
         ],
         "emoji": ["🛞", "🚗", "🏭", "⚡", "🌏"],
-        "bg": ["#fee2e2", "#e0e7ff", "#ecfdf5", "#fff7ed", "#eef2ff"],
     },
     "Econ": {
-        "include": r"(재테크|연금|ISA|절세|코스피|코스닥|환율|금리|증시|주식|펀드|ETF|리츠|부동산|집값|전세|청약|대출|예금|적금|세금|배당|물가|가계)",
-        "exclude": r"(사기|도박|연예|스포츠)",
+        "weights": [
+            (r"코스피|코스닥|환율|기준금리|금리|증시|국채", 9),
+            (r"연금|IRP|ISA|절세|세액공제|배당|ETF|펀드|리츠", 8),
+            (r"집값|전세|청약|대출|부동산|아파트|주담대", 7),
+            (r"재테크|예금|적금|물가|가계|세금|주식|투자", 4),
+        ],
+        "exclude": r"(사기|도박|연예|스포츠|코인|비트코인)",
         "gnews": [
-            '재테크 OR 연금저축 OR ISA OR 절세 when:4d',
             '코스피 OR 환율 OR 기준금리 when:2d',
+            '연금저축 OR ISA OR 절세 OR 세액공제 when:4d',
             '부동산 OR 청약 OR 대출규제 when:3d',
         ],
-        "emoji": ["💰", "📈", "🏦", "🏠", "💳"],
-        "bg": ["#ecfdf5", "#fef9c3", "#e0f2fe", "#f1f5f9", "#fae8ff"],
+        "emoji": ["📈", "💰", "🏦", "🏠", "💳"],
     },
 }
+MIN_SCORE = 4
 
 BOILERPLATE = r"(Google 뉴스|전세계 매체|구독하기|무단전재|재배포 금지|기사제보)"
 
@@ -168,46 +185,56 @@ def google_news(query):
     return items
 
 
+def score(title, cfg):
+    return sum(w for pat, w in cfg["weights"] if re.search(pat, title))
+
+
 def pick(cat, cfg, feed_pool):
-    inc = re.compile(cfg["include"])
     exc = re.compile(cfg["exclude"])
     fresh = NOW - timedelta(days=MAX_AGE_DAYS)
 
-    def ok(it):
-        t = it["title"]
-        return (it["dt"] >= fresh and inc.search(t)
-                and not exc.search(t + " " + it["desc"]))
+    cands = [i for i in feed_pool if i["dt"] >= fresh]
+    # 공식 RSS에 더해 구글 뉴스도 항상 보충 (카테고리 적합도 확보)
+    for q in cfg["gnews"]:
+        try:
+            cands += [i for i in google_news(q) if i["dt"] >= fresh]
+        except Exception as e:
+            print(f"  ! 구글뉴스 실패 ({cat}): {e}", file=sys.stderr)
 
-    cands = sorted([i for i in feed_pool if ok(i)],
-                   key=lambda x: x["dt"], reverse=True)
-
-    # 공식 RSS로 부족하면 구글 뉴스로 보충
-    if len(cands) < PER_CATEGORY:
-        for q in cfg["gnews"]:
-            try:
-                cands += [i for i in google_news(q) if i["dt"] >= fresh]
-            except Exception as e:
-                print(f"  ! 구글뉴스 실패 ({cat}): {e}", file=sys.stderr)
-            if len(cands) >= PER_CATEGORY * 3:
-                break
-
-    cards, seen = [], set()
+    scored = []
     for it in cands:
+        if exc.search(it["title"] + " " + it["desc"]):
+            continue
+        sc = score(it["title"], cfg)
+        if sc < MIN_SCORE:
+            continue
+        # 공식 RSS(요약 있음)에 약간 가산, 최신일수록 가산
+        age_h = max(0, (NOW - it["dt"]).total_seconds() / 3600)
+        sc += 1.5 if not it.get("via_gnews") else 0
+        sc += max(0, 3 - age_h / 24)
+        scored.append((sc, it))
+    scored.sort(key=lambda x: x[0], reverse=True)
+
+    cards, seen, src_count = [], set(), {}
+    for _, it in scored:
         if len(cards) >= PER_CATEGORY:
             break
         k = norm(it["title"])[:28]
         if not k or k in seen:
             continue
+        # 한 매체가 카테고리를 독점하지 않도록 최대 2건
+        if src_count.get(it["source"], 0) >= 2:
+            continue
         seen.add(k)
+        src_count[it["source"]] = src_count.get(it["source"], 0) + 1
         summary = good_summary(it["desc"], it["title"]) or (
             f"{it['source']} 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.")
         i = len(cards)
         cards.append({
             "emoji": cfg["emoji"][i % len(cfg["emoji"])],
-            "bg": cfg["bg"][i % len(cfg["bg"])],
             "source": clamp(it["source"], 20),
             "headline": clamp(it["title"], 58),
-            "summary": clamp(summary, 108),
+            "summary": clamp(re.sub(r"^\([^)]*\)\s*[^=]{0,12}=\s*", "", summary), 108),
             "date": it["dt"].strftime("%Y.%m.%d"),
             "isNew": (NOW - it["dt"]) <= timedelta(hours=30),
             "url": it["url"],
@@ -217,21 +244,6 @@ def pick(cat, cfg, feed_pool):
 
 def js(s):
     return json.dumps(s, ensure_ascii=False)
-
-
-def render_block(data, updated):
-    L = ["// <!--NEWS:START--> 이 블록은 GitHub Actions가 매일 자동 갱신합니다. 직접 수정 시 다음 실행에 덮어써집니다.",
-         "const newsData = {", f"  updated: {js(updated)},"]
-    for cat in ("HR", "Tire", "Econ"):
-        L.append(f"  {cat}: [")
-        for c in data[cat]:
-            L.append("    { emoji:%s, bg:%s, source:%s, headline:%s, summary:%s, date:%s, isNew:%s, url:%s },"
-                     % (js(c["emoji"]), js(c["bg"]), js(c["source"]), js(c["headline"]),
-                        js(c["summary"]), js(c["date"]),
-                        "true" if c["isNew"] else "false", js(c["url"])))
-        L.append("  ],")
-    L += ["};", "// <!--NEWS:END-->"]
-    return "\n".join(L)
 
 
 def main():
@@ -249,12 +261,16 @@ def main():
         print("건수 부족 → 기존 내용 유지 (갱신 취소)", file=sys.stderr)
         return 1
 
-    src = open(TARGET, encoding="utf-8").read()
-    a = src.index("// <!--NEWS:START-->")
-    b = src.index("// <!--NEWS:END-->") + len("// <!--NEWS:END-->")
     updated = NOW.strftime("%Y.%m.%d %H:%M")
-    new = src[:a] + render_block(data, updated) + src[b:]
-    if new == src:
+    out = {"updated": updated, **data}
+    new = json.dumps(out, ensure_ascii=False, indent=1) + "\n"
+    try:
+        old = open(TARGET, encoding="utf-8").read()
+    except FileNotFoundError:
+        old = ""
+    # 시각만 바뀐 경우는 커밋하지 않도록 비교
+    strip = lambda t: re.sub(r'"updated": "[^"]*"', "", t)
+    if strip(new) == strip(old):
         print("변경 없음")
         return 0
     open(TARGET, "w", encoding="utf-8").write(new)
