@@ -1,0 +1,38 @@
+name: Daily News Update
+
+on:
+  schedule:
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Update news
+        run: python scripts/update_news.py
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "no change"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore(news): auto update $(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M KST')"
+          git push

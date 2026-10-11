@@ -4,10 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111111">
-<meta name="description" content="PeConneton — 한국타이어앤테크놀로지 금산공장 경영관리팀 책임차장. 금산의 하루, 조직문화·HR·교육 기록.">
+<meta name="description" content="PeConneton — 한국타이어앤테크놀로지 금산공장 경영관리팀 책임차장. Photography, 조직문화·HR·교육 기록.">
 <meta property="og:title" content="PeConneton">
-<meta property="og:description" content="금산의 하루 · 조직문화 · HR · 강연 기록">
+<meta property="og:description" content="Photography · 조직문화 · HR · 강연 기록">
 <meta property="og:type" content="website">
+<meta property="og:see_also" content="https://www.instagram.com/kimjy0905/">
 <title>PeConneton</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
 
@@ -81,6 +82,82 @@ img { max-width: 100%; display: block; }
 .hero-dot.active { background: #fff; width: 44px; }
 .hero-pause { position: absolute; bottom: 16px; right: 24px; z-index: 10; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; font-size: 12px; cursor: pointer; transition: background .15s; }
 .hero-pause:hover { background: rgba(255,255,255,.3); }
+
+/* ── HERO KINETIC TYPOGRAPHY (desktop right margin) ── */
+.hero-typo {
+  position: absolute; z-index: 6; pointer-events: none;
+  top: clamp(52px, 19%, 150px); right: clamp(24px, 4vw, 72px);
+  width: min(46%, 560px);
+  display: none; flex-direction: column; align-items: flex-end;
+  text-align: right;
+  font-family: -apple-system, 'SF Pro Display', BlinkMacSystemFont, 'Helvetica Neue', var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+.hero-typo-kicker {
+  font-size: 10px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase;
+  color: rgba(255,255,255,.45); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+  animation: typoIn .9s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-typo-kicker::after { content: ''; width: 26px; height: 1px; background: rgba(255,255,255,.32); }
+
+/* 타이핑 무대 — 높이 고정으로 레이아웃 흔들림 방지 */
+.hero-typo-stage {
+  min-height: 1.1em; display: flex; align-items: center; justify-content: flex-end;
+  font-size: clamp(34px, 3.6vw, 62px); line-height: 1.08; letter-spacing: -.035em;
+  font-weight: 200; color: #fff; text-shadow: 0 2px 26px rgba(0,0,0,.6);
+  animation: typoIn 1s cubic-bezier(.22,1,.36,1) .1s both;
+}
+.hero-typo-stage b { font-weight: 700; }
+.hero-typo-caret {
+  display: inline-block; width: 3px; height: .86em; margin-left: 5px; border-radius: 2px;
+  background: var(--accent); box-shadow: 0 0 14px rgba(219,82,0,.8);
+  animation: typoCaret 1s steps(1) infinite; transform: translateY(.04em);
+}
+.hero-typo-stage.is-typing .hero-typo-caret { animation: none; opacity: 1; }
+
+/* 의미 한 줄 */
+.hero-typo-meaning {
+  margin-top: 12px; height: 3.05em;
+  display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-start;
+  font-size: 13.5px; font-weight: 300; line-height: 1.6; letter-spacing: .005em;
+  color: rgba(255,255,255,.64); text-shadow: 0 1px 10px rgba(0,0,0,.6);
+  word-break: keep-all;
+}
+.hero-typo-meaning span {
+  display: block; white-space: nowrap;
+  opacity: 0; transform: translateY(8px); filter: blur(4px);
+  transition: opacity .5s ease, transform .55s cubic-bezier(.22,1,.36,1), filter .5s ease;
+}
+.hero-typo-meaning .l2 { transition-delay: .1s; color: rgba(255,255,255,.78); }
+.hero-typo-meaning.show span { opacity: 1; transform: none; filter: blur(0); }
+
+.hero-typo-rule {
+  margin-top: 14px; width: 100%; max-width: 180px; height: 2px; border-radius: 999px;
+  background: rgba(255,255,255,.14); overflow: hidden; position: relative;
+  animation: typoIn 1s cubic-bezier(.22,1,.36,1) .5s both;
+}
+.hero-typo-rule i {
+  position: absolute; inset: 0 auto 0 0; width: 0%; border-radius: 999px;
+  background: linear-gradient(90deg, rgba(219,82,0,.4) 0%, var(--accent) 100%);
+  transition: width .35s linear;
+}
+.hero-typo-index {
+  margin-top: 10px; font-size: 10px; font-weight: 500; letter-spacing: .22em;
+  color: rgba(255,255,255,.4); font-variant-numeric: tabular-nums;
+  animation: typoIn 1s cubic-bezier(.22,1,.36,1) .6s both;
+}
+
+@keyframes typoIn { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes typoCaret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+@media (min-width: 860px) { .hero-typo { display: flex; } }
+@media (max-height: 620px) { .hero-typo { top: 40px; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-typo-kicker, .hero-typo-stage, .hero-typo-rule, .hero-typo-index { animation: none; }
+  .hero-typo-caret { animation: none; opacity: 0; }
+  .hero-typo-meaning span { opacity: 1; transform: none; filter: blur(0); transition: none; }
+}
 
 /* SEARCH BAR */
 .search-bar-wrap { padding: 14px 20px; background: #fff; border-bottom: 2px solid var(--accent); }
@@ -461,7 +538,7 @@ img { max-width: 100%; display: block; }
     <div class="nav-logo-sub">김진영 · driving life</div>
   </div>
   <div class="nav-links">
-    <div class="nav-link" onclick="navigate('gallery')">금산의 하루</div>
+    <div class="nav-link" onclick="navigate('gallery')">Photography</div>
     <div class="nav-link" onclick="navigate('about')">About Me</div>
     <div class="nav-link" onclick="navigate('news')">News</div>
   </div>
@@ -476,7 +553,7 @@ img { max-width: 100%; display: block; }
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-nav-item" onclick="navigate('home')">홈 <span>›</span></div>
-  <div class="mobile-nav-item" onclick="navigate('gallery')">금산의 하루 <span>›</span></div>
+  <div class="mobile-nav-item" onclick="navigate('gallery')">Photography <span>›</span></div>
   <div class="mobile-nav-item" onclick="navigate('about')">About Me <span>›</span></div>
   <div class="mobile-nav-item" onclick="navigate('news')">News <span>›</span></div>
   <div class="mobile-nav-item" onclick="navigate('guestbook')">방명록 <span>›</span></div>
@@ -496,8 +573,8 @@ img { max-width: 100%; display: block; }
         <div class="hero-content">
           <div class="hero-label">PeConneton — Oct 2026</div>
           <div class="hero-title">일상을 기록하고<br>연결을 만들어갑니다</div>
-          <div class="hero-sub">경영관리 · 조직문화 · 금산의 하루</div>
-          <div class="hero-cta-btn" onclick="navigate('gallery')">금산의 하루 →</div>
+          <div class="hero-sub">경영관리 · 조직문화 · Photography</div>
+          <div class="hero-cta-btn" onclick="navigate('gallery')">Photography →</div>
         </div>
       </div>
       <div class="hero-slide">
@@ -518,12 +595,19 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <div class="hero-label">⛳ 금산의 하루</div>
+          <div class="hero-label">📷 Photography</div>
           <div class="hero-title">그 순간을<br>담아둡니다</div>
           <div class="hero-sub">골프 · 금산 인삼 축제 · 맛집 · 일상</div>
           <div class="hero-cta-btn" onclick="navigate('gallery')">사진 보기 →</div>
         </div>
       </div>
+    </div>
+    <div class="hero-typo" aria-hidden="true">
+      <div class="hero-typo-kicker">Life at Work</div>
+      <div class="hero-typo-stage" id="typoStage"><span id="typoText"></span><span class="hero-typo-caret"></span></div>
+      <div class="hero-typo-meaning" id="typoMeaning"></div>
+      <div class="hero-typo-rule"><i id="typoBar"></i></div>
+      <div class="hero-typo-index" id="typoIndex">01 / 05</div>
     </div>
     <div class="hero-dots" id="heroDots">
       <div class="hero-dot active" data-i="0"></div>
@@ -540,7 +624,7 @@ img { max-width: 100%; display: block; }
       <div class="footer-acc-item">
         <div class="footer-acc-head">메뉴 <span class="footer-acc-plus">+</span></div>
         <div class="footer-acc-body">
-          <a class="footer-acc-link" href="#" onclick="navigate('gallery');return false">금산의 하루</a>
+          <a class="footer-acc-link" href="#" onclick="navigate('gallery');return false">Photography</a>
           <a class="footer-acc-link" href="#" onclick="navigate('about');return false">About Me</a>
           <a class="footer-acc-link" href="#" onclick="navigate('news');return false">News</a>
           <a class="footer-acc-link" href="#" onclick="navigate('guestbook');return false">방명록</a>
@@ -550,6 +634,7 @@ img { max-width: 100%; display: block; }
         <div class="footer-acc-head">연결 <span class="footer-acc-plus">+</span></div>
         <div class="footer-acc-body">
           <a class="footer-acc-link" href="https://blog.naver.com/a840127" target="_blank">네이버 블로그 AlignUp.F↑</a>
+          <a class="footer-acc-link" href="https://www.instagram.com/kimjy0905/" target="_blank" rel="noopener">Instagram @kimjy0905</a>
           <a class="footer-acc-link" href="https://itdaa.net" target="_blank">잇다 멘토</a>
           <a class="footer-acc-link" href="https://www.hankooktire.com" target="_blank">한국타이어앤테크놀로지</a>
         </div>
@@ -557,8 +642,9 @@ img { max-width: 100%; display: block; }
     </div>
     <div class="footer-social">
       <div class="footer-social-btn" onclick="window.open('https://blog.naver.com/a840127')">N</div>
-      <div class="footer-social-btn" onclick="showToast('YouTube')">▶</div>
-      <div class="footer-social-btn" onclick="showToast('Instagram')">◎</div>
+      <div class="footer-social-btn" title="Instagram" onclick="window.open('https://www.instagram.com/kimjy0905/','_blank','noopener')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      </div>
       <div class="footer-social-btn" onclick="window.open('https://itdaa.net')">i</div>
     </div>
     <div class="footer-legal">
@@ -573,7 +659,7 @@ img { max-width: 100%; display: block; }
 
 <!-- GALLERY -->
 <div class="page-wrap" id="page-gallery">
-  <div class="page-title">금산의 하루 📷</div>
+  <div class="page-title">Photography 📷</div>
   <div class="page-sub">일상 · 골프 · 축제 · 맛집 기록</div>
   <div class="gallery-filter" id="galFilter"></div>
   <div class="gal-count" id="galCount"></div>
@@ -655,8 +741,12 @@ img { max-width: 100%; display: block; }
   <div class="recent-blog-title">📝 최근 글</div>
   <div id="aboutBlogList"></div>
 
-  <div style="text-align:center;margin-top:16px;">
-    <a href="https://blog.naver.com/a840127" target="_blank" class="hero-cta-btn" style="display:inline-flex;background:#111;color:#fff;">네이버 블로그 보기 →</a>
+  <div style="text-align:center;margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://blog.naver.com/a840127" target="_blank" rel="noopener" class="hero-cta-btn" style="display:inline-flex;background:#111;color:#fff;">네이버 블로그 보기 →</a>
+    <a href="https://www.instagram.com/kimjy0905/" target="_blank" rel="noopener" class="hero-cta-btn" style="display:inline-flex;gap:6px;align-items:center;background:#fff;color:#111;border:1px solid var(--border);">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
   </div>
 
   <!-- Work With Me -->
@@ -693,7 +783,7 @@ img { max-width: 100%; display: block; }
   <div class="page-sub">HR · 경영 · 타이어산업 · 재테크 최신 뉴스</div>
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
     <button class="news-refresh-btn" id="newsRefreshBtn">🔄 새로고침</button>
-    <span style="font-size:11px;color:var(--fg3);" id="newsUpdateTime">업데이트: 2026.10.10 15:50</span>
+    <span style="font-size:11px;color:var(--fg3);" id="newsUpdateTime">업데이트: -</span>
   </div>
 
   <div class="news-section-label">HR · 조직문화</div>
@@ -1087,6 +1177,7 @@ blogPosts.forEach(p => {
 });
 
 // ── NEWS DATA ──
+// <!--NEWS:START--> 이 블록은 GitHub Actions가 매일 자동 갱신합니다. 직접 수정 시 다음 실행에 덮어써집니다.
 const newsData = {
   HR: [
     { emoji:'📊', bg:'#e8f0fe', source:'HR Insight', headline:'2026년 국내 기업 직원 몰입도 조사 결과 발표', summary:'국내 주요 기업 1,200개사 대상 직원 몰입도 조사에서 소조직 단위 소통 강화 기업이 평균 23% 높은 몰입도를 보였습니다.', date:'2026.10.09', isNew:true },
@@ -1103,6 +1194,7 @@ const newsData = {
     { emoji:'🏠', bg:'#fef3c7', source:'부동산114', headline:'지방 중소도시 아파트 거래량 3개월 연속 증가', summary:'충남·충북 등 지방 중소도시 아파트 거래량이 3개월 연속 증가세를 보이고 있습니다. 금리 인하 기대감과 실수요 증가가 주요 요인으로 분석됩니다.', date:'2026.10.08', isNew:false },
   ]
 };
+// <!--NEWS:END-->
 function renderNews(containerId, list) {
   const el = document.getElementById(containerId); el.innerHTML = '';
   list.forEach(n => {
@@ -1117,10 +1209,11 @@ function renderNews(containerId, list) {
         </div>
       </div>
       <div class="news-date">${n.date}</div>`;
-    card.addEventListener('click', () => showToast('외부 뉴스 링크로 이동 →'));
+    card.addEventListener('click', () => { if (n.url) { window.open(n.url, '_blank', 'noopener'); } else { showToast('외부 뉴스 링크로 이동 →'); } });
     el.appendChild(card);
   });
 }
+if (newsData.updated) document.getElementById('newsUpdateTime').textContent = '업데이트: ' + newsData.updated;
 renderNews('newsHR', newsData.HR);
 renderNews('newsTire', newsData.Tire);
 renderNews('newsEcon', newsData.Econ);
@@ -1160,6 +1253,88 @@ document.getElementById('gbBtn').addEventListener('click', () => {
 
 
 
+
+// ── HERO KINETIC TYPOGRAPHY (typewriter) ──
+(function () {
+  var stage = document.getElementById('typoStage');
+  if (!stage) return;
+  var elText = document.getElementById('typoText');
+  var elMean = document.getElementById('typoMeaning');
+  var elBar  = document.getElementById('typoBar');
+  var elIdx  = document.getElementById('typoIndex');
+
+  // 단어 + 회사 생활에서의 의미
+  var WORDS = [
+    { w: 'Connect',       bold: 4, lines: ['경계는 조직이 만들고', '연결은 사람이 만듭니다'] },
+    { w: 'People',        bold: 3, lines: ['숫자는 결과를 말하고', '사람은 과정을 남깁니다'] },
+    { w: 'Collaboration', bold: 5, lines: ['각자의 전문을 모아서', '하나의 결론에 닿습니다'] },
+    { w: 'Culture',       bold: 3, lines: ['규정은 문서에 남지만', '문화는 태도로 남습니다'] },
+    { w: 'Growth',        bold: 4, lines: ['어제의 기준을 넘어서', '오늘의 기준을 세웁니다'] }
+  ];
+
+  var TYPE = 85, ERASE = 38, HOLD = 2600, GAP = 420;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function paint(item, n) {
+    var s = item.w.slice(0, n), b = item.bold;
+    elText.innerHTML = n <= b
+      ? '<b>' + s + '</b>'
+      : '<b>' + s.slice(0, b) + '</b>' + s.slice(b);
+  }
+  function setMeta(i) {
+    elIdx.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(WORDS.length).padStart(2, '0');
+    elBar.style.width = ((i + 1) / WORDS.length * 100) + '%';
+  }
+
+  if (reduce) {
+    var it = WORDS[0];
+    paint(it, it.w.length);
+    elMean.innerHTML = '<span class="l1">' + it.lines[0] + '</span><span class="l2">' + it.lines[1] + '</span>';
+    elMean.classList.add('show'); setMeta(0);
+    return;
+  }
+
+  var i = 0, n = 0, mode = 'type', timer = null;
+
+  function tick() {
+    var item = WORDS[i];
+    if (mode === 'type') {
+      stage.classList.add('is-typing');
+      n++; paint(item, n); setMeta(i);
+      if (n >= item.w.length) {
+        stage.classList.remove('is-typing');
+        mode = 'hold';
+        elMean.innerHTML = '<span class="l1">' + item.lines[0] + '</span><span class="l2">' + item.lines[1] + '</span>';
+        requestAnimationFrame(function () { elMean.classList.add('show'); });
+        timer = setTimeout(tick, HOLD);
+      } else {
+        timer = setTimeout(tick, TYPE + Math.random() * 45);
+      }
+    } else if (mode === 'hold') {
+      elMean.classList.remove('show');
+      mode = 'erase';
+      timer = setTimeout(tick, GAP);
+    } else {
+      stage.classList.add('is-typing');
+      n--; paint(item, Math.max(n, 0));
+      if (n <= 0) {
+        stage.classList.remove('is-typing');
+        i = (i + 1) % WORDS.length; n = 0; mode = 'type';
+        timer = setTimeout(tick, GAP);
+      } else {
+        timer = setTimeout(tick, ERASE);
+      }
+    }
+  }
+
+  // 탭이 백그라운드면 멈춤 (애니메이션 밀림 방지)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { clearTimeout(timer); }
+    else { clearTimeout(timer); timer = setTimeout(tick, 300); }
+  });
+
+  timer = setTimeout(tick, 900);
+})();
 </script>
 <!-- cache bust 2026-10-11 13:13:57 KST -->
 
