@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>사주 보기 · PeConnecton</title>
+<meta name="description" content="생년월일과 태어난 시간으로 사주 네 기둥을 뽑아 보는 재미있는 사주 풀이 페이지">
+<meta name="robots" content="index, follow">
+<style>
+  :root { --bg:#0A0A0A; --card:#141414; --line:#262626; --fg:#F2F2F2; --sub:#8A8A8A; --accent:#FC6A10; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: var(--bg); color: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+  body { padding: 0 16px; padding-block: 24px 60px; line-height: 1.6; }
+  .wrap { max-width: 560px; margin: 0 auto; }
+  a.back { color: var(--sub); text-decoration: none; font-size: 13px; }
+  a.back:hover { color: var(--accent); }
+  h1 { font-size: 28px; font-weight: 800; margin: 18px 0 6px; }
+  h1 span { color: var(--accent); }
+  .sub { color: var(--sub); font-size: 14px; margin-bottom: 22px; word-break: keep-all; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin-bottom: 16px; }
+  label { display: block; font-size: 12px; color: var(--sub); margin-bottom: 6px; letter-spacing: .04em; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .row.one { grid-template-columns: 1fr; }
+  input, select { width: 100%; background: #0E0E0E; color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 12px; font-size: 15px; font-family: inherit; }
+  input:focus, select:focus { outline: none; border-color: var(--accent); }
+  .check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--sub); margin-bottom: 18px; }
+  .btn { width: 100%; background: var(--accent); color: #fff; border: 0; border-radius: 999px; padding: 14px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .btn:active { transform: scale(.99); }
+  .err { color: #ff6b6b; font-size: 13px; min-height: 18px; margin-top: 10px; }
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 6px; }
+  .pillar { background: #0E0E0E; border: 1px solid var(--line); border-radius: 12px; padding: 12px 6px; text-align: center; }
+  .pillar .k { font-size: 11px; color: var(--sub); letter-spacing: .08em; }
+  .pillar .hj { font-size: 30px; font-weight: 800; line-height: 1.15; margin: 6px 0 2px; }
+  .pillar .kr { font-size: 12px; color: var(--sub); }
+  .pillar.me { border-color: var(--accent); }
+  .pillar.none { opacity: .4; }
+  .bar { display: grid; grid-template-columns: 44px 1fr 28px; align-items: center; gap: 8px; font-size: 13px; margin: 6px 0; }
+  .bar .track { height: 10px; background: #1E1E1E; border-radius: 999px; overflow: hidden; }
+  .bar .fill { height: 100%; background: var(--accent); border-radius: 999px; }
+  h2 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+  .kw { font-size: 14px; color: #d8d8d8; word-break: keep-all; }
+  .tag { display: inline-block; font-size: 12px; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
+  .note { font-size: 12px; color: #6d6d6d; line-height: 1.6; margin-top: 14px; word-break: keep-all; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← PeConnecton으로 돌아가기</a>
+  <h1>사주 <span>보기</span></h1>
+  <div class="sub">생년월일과 태어난 시간을 넣으면 사주 네 기둥을 뽑아 드려요. 재미로 보는 풀이입니다.</div>
+
+  <form class="card" id="form" autocomplete="off">
+    <div class="row">
+      <div>
+        <label for="bd">생년월일 (양력)</label>
+        <input id="bd" type="date" min="1900-01-01" max="2100-12-31" required>
+      </div>
+      <div>
+        <label for="bh">태어난 시간</label>
+        <select id="bh">
+          <option value="">모름</option>
+          <option value="0">00:00 ~ 00:59 (자시)</option>
+          <option value="1">01:00 ~ 02:59 (축시)</option>
+          <option value="3">03:00 ~ 04:59 (인시)</option>
+          <option value="5">05:00 ~ 06:59 (묘시)</option>
+          <option value="7">07:00 ~ 08:59 (진시)</option>
+          <option value="9">09:00 ~ 10:59 (사시)</option>
+          <option value="11">11:00 ~ 12:59 (오시)</option>
+          <option value="13">13:00 ~ 14:59 (미시)</option>
+          <option value="15">15:00 ~ 16:59 (신시)</option>
+          <option value="17">17:00 ~ 18:59 (유시)</option>
+          <option value="19">19:00 ~ 20:59 (술시)</option>
+          <option value="21">21:00 ~ 22:59 (해시)</option>
+          <option value="23">23:00 ~ 23:59 (자시)</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn" type="submit">사주 보기</button>
+    <div class="err" id="err"></div>
+  </form>
+
+  <div id="result" class="hidden">
+    <div class="card">
+      <h2>사주 네 기둥</h2>
+      <div class="pillars" id="pillars"></div>
+      <div class="note" id="pillarNote"></div>
+    </div>
+
+    <div class="card">
+      <h2>나의 일간 <span id="dmName" style="color:var(--accent)"></span></h2>
+      <div class="kw" id="dmText"></div>
+    </div>
+
+    <div class="card">
+      <h2>오행 분포</h2>
+      <div id="bars"></div>
+      <div style="margin-top:14px" id="tags"></div>
+      <div class="kw" id="ohText"></div>
+    </div>
+
+    <div class="note">
+      ※ 이 풀이는 재미로 보는 콘텐츠이며 과학적 근거가 없습니다. 중요한 결정은 스스로 판단해 주세요.<br>
+      ※ 월주는 절기 날짜를 근사치로 계산합니다. 절기 경계일(매월 4~8일 무렵)에 태어나셨다면 한두 시간 차이로 결과가 달라질 수 있습니다.<br>
+      ※ 음력 생일은 양력으로 바꾼 뒤 입력해 주세요. 태어난 시간을 모르면 "모름"을 선택하면 시주는 빈칸으로 표시됩니다.
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 기본 데이터 ──
+const STEMS = [
+  {hj:'甲', kr:'갑', el:'목'}, {hj:'乙', kr:'을', el:'목'},
+  {hj:'丙', kr:'병', el:'화'}, {hj:'丁', kr:'정', el:'화'},
+  {hj:'戊', kr:'무', el:'토'}, {hj:'己', kr:'기', el:'토'},
+  {hj:'庚', kr:'경', el:'금'}, {hj:'辛', kr:'신', el:'금'},
+  {hj:'壬', kr:'임', el:'수'}, {hj:'癸', kr:'계', el:'수'}
+];
+const BRANCHES = [
+  {hj:'子', kr:'자', el:'수', an:'쥐'}, {hj:'丑', kr:'축', el:'토', an:'소'},
+  {hj:'寅', kr:'인', el:'목', an:'호랑이'}, {hj:'卯', kr:'묘', el:'목', an:'토끼'},
+  {hj:'辰', kr:'진', el:'토', an:'용'}, {hj:'巳', kr:'사', el:'화', an:'뱀'},
+  {hj:'午', kr:'오', el:'화', an:'말'}, {hj:'未', kr:'미', el:'토', an:'양'},
+  {hj:'申', kr:'신', el:'금', an:'원숭이'}, {hj:'酉', kr:'유', el:'금', an:'닭'},
+  {hj:'戌', kr:'술', el:'토', an:'개'}, {hj:'亥', kr:'해', el:'수', an:'돼지'}
+];
+const OH = ['목','화','토','금','수'];
+const OH_COLOR = {목:'#4CAF50', 화:'#FC6A10', 토:'#D4A853', 금:'#C0C6CF', 수:'#4A90E2'};
+// 일간(日干) 키워드 — 재미용 해설
+const DM_TEXT = [
+  '큰 나무처럼 곧고 리더십이 있어요. 성장하고 싶은 욕구가 강하고, 한번 정하면 밀고 나가는 편입니다.',
+  '풀과 덩굴처럼 유연하고 섬세해요. 어떤 환경에도 잘 적응하고, 사람의 감정을 세심하게 읽습니다.',
+  '태양처럼 밝고 열정적이에요. 드러나는 자리를 좋아하고, 주변에 활기를 주는 사람입니다.',
+  '촛불처럼 따뜻하고 섬세해요. 한 가지에 깊이 몰입하는 집중력이 강하고, 작은 것을 잘 챙깁니다.',
+  '큰 산처럼 믿음직하고 묵직해요. 변화보다 안정을 좋아하고, 한번 맡은 일은 끝까지 책임집니다.',
+  '논밭의 흙처럼 포용력이 있고 실속이 있어요. 사람을 품는 힘이 있고 주변을 살뜰히 챙깁니다.',
+  '쇠(칼, 도끼)처럼 결단력이 있고 원칙적이에요. 승부욕이 강하고 맺고 끊음이 분명합니다.',
+  '보석처럼 예리하고 완벽을 추구해요. 자존심이 강한 편이라 스스로에게 엄격하고, 섬세한 감각이 있습니다.',
+  '큰 바다나 강처럼 생각이 넓고 자유로워요. 새로운 세계를 좋아하고 변화가 많은 삶을 살기 쉽습니다.',
+  '빗물이나 이슬처럼 감수성이 풍부하고 직관이 좋아요. 사람의 마음을 잘 헤아리고 조용히 스며드는 힘이 있습니다.'
+];
+// 오행 기운별 한 줄 풀이
+const OH_TEXT = {
+  목: '성장·시작·추진의 기운',
+  화: '열정·표현·사교의 기운',
+  토: '믿음·중재·안정의 기운',
+  금: '결단·정리·원칙의 기운',
+  수: '지혜·유연·소통의 기운'
+};
+
+// ── 날짜 계산 ──
+// 그레고리력 → 율리우스일(JDN)
+function jdn(y, m, d) {
+  const a = Math.floor((14 - m) / 12);
+  const y2 = y + 4800 - a;
+  const m2 = m + 12 * a - 3;
+  return d + Math.floor((153 * m2 + 2) / 5) + 365 * y2 + Math.floor(y2 / 4) - Math.floor(y2 / 100) + Math.floor(y2 / 400) - 32045;
+}
+const mod = (n, k) => ((n % k) + k) % k;
+
+// 절기(절입) 시작일 근사치 — 월(1~12)별 "그 달의 절입 일"
+// 월주 경계: 소한(1/6)→丑월, 입춘(2/4)→寅월, ... 대설(12/7)→子월
+const JEOL_DAY = {1:6, 2:4, 3:6, 4:5, 5:6, 6:6, 7:7, 8:7, 9:8, 10:8, 11:7, 12:7};
+
+// 사주 네 기둥 계산. hour: 0~23 또는 null(모름)
+function calcSaju(y, m, d, hour) {
+  // 1) 연주: 입춘(2/4) 이전이면 전년도
+  const sajuYear = (m < 2 || (m === 2 && d < JEOL_DAY[2])) ? y - 1 : y;
+  const yStem = mod(sajuYear - 4, 10);
+  const yBranch = mod(sajuYear - 4, 12);
+
+  // 2) 월주: 절입일 기준으로 사주상 월(1=소한부터 ~ 12=대설부터) 결정
+  //    사주 월지: 寅(인)=2월(입춘), 卯=3월 … 子=12월, 丑=1월
+  let sm = m;
+  if (d < JEOL_DAY[m]) sm = m === 1 ? 12 : m - 1;
+  const mBranch = mod(sm, 12);               // 1월→丑(1), 2월→寅(2), 12월→子(0)
+  const tigerIdx = mod(mBranch - 2, 12);     // 寅을 0으로 한 순서
+  const mStem = mod((yStem % 5) * 2 + 2 + tigerIdx, 10);
+
+  // 3) 일주: 기준일 2000-01-01 = 戊午 (JDN 2451545)
+  const J = jdn(y, m, d);
+  const dStem = mod(J + 49, 10);
+  const dBranch = mod(J + 1, 12);
+
+  // 4) 시주: 시지 = 子(23~00:59) 기준 2시간 단위, 시간은 일간에서 파생
+  let hStem = null, hBranch = null;
+  if (hour !== null) {
+    hBranch = mod(Math.floor((hour + 1) / 2), 12);
+    hStem = mod((dStem % 5) * 2 + hBranch, 10);
+  }
+  return { year:{s:yStem,b:yBranch}, month:{s:mStem,b:mBranch}, day:{s:dStem,b:dBranch}, hour:{s:hStem,b:hBranch} };
+}
+
+// ── 화면 ──
+function pillarHTML(label, p, isDay) {
+  if (p.s === null) {
+    return `<div class="pillar none"><div class="k">${label}</div><div class="hj">?</div><div class="kr">시간 모름</div></div>`;
+  }
+  const S = STEMS[p.s], B = BRANCHES[p.b];
+  return `<div class="pillar${isDay ? ' me' : ''}">
+    <div class="k">${label}</div>
+    <div class="hj">${S.hj}${B.hj}</div>
+    <div class="kr">${S.kr}${B.kr} · ${B.an}띠</div>
+  </div>`;
+}
+
+function render(saju, hasHour) {
+  const sets = [['년주', saju.year], ['월주', saju.month], ['일주', saju.day], ['시주', saju.hour]];
+  document.getElementById('pillars').innerHTML =
+    sets.map(([l, p], i) => pillarHTML(l, p, i === 2)).join('');
+  document.getElementById('pillarNote').textContent =
+    hasHour ? '일주의 천간이 "나"를 뜻하는 일간이에요.' : '태어난 시간을 모르면 시주는 빈칸입니다. 시간을 알면 더 자세히 볼 수 있어요.';
+
+  // 일간
+  const dm = STEMS[saju.day.s];
+  document.getElementById('dmName').textContent = `${dm.kr}(${dm.hj}) · ${dm.el}`;
+  document.getElementById('dmText').textContent = DM_TEXT[saju.day.s];
+
+  // 오행 집계 (시주 모름이면 제외)
+  const cnt = {목:0, 화:0, 토:0, 금:0, 수:0};
+  const add = (p) => { if (p.s === null) return; cnt[STEMS[p.s].el]++; cnt[BRANCHES[p.b].el]++; };
+  [saju.year, saju.month, saju.day, saju.hour].forEach(add);
+  const total = Object.values(cnt).reduce((a, b) => a + b, 0) || 1;
+  const max = Math.max(...Object.values(cnt));
+
+  document.getElementById('bars').innerHTML = OH.map(k => {
+    const pct = Math.round(cnt[k] / total * 100);
+    return `<div class="bar"><span>${k}</span>
+      <div class="track"><div class="fill" style="width:${pct}%;background:${OH_COLOR[k]}"></div></div>
+      <span>${cnt[k]}</span></div>`;
+  }).join('');
+
+  const strong = OH.filter(k => cnt[k] === max && max > 0);
+  const weak = OH.filter(k => cnt[k] === 0);
+  document.getElementById('tags').innerHTML =
+    strong.map(k => `<span class="tag">강한 기운: ${k}</span>`).join('') +
+    weak.map(k => `<span class="tag" style="border-color:#444;color:#888">부족한 기운: ${k}</span>`).join('');
+  const parts = [];
+  if (strong.length) parts.push(`${strong.join('·')} 기운이 강해 ${strong.map(k => OH_TEXT[k]).join(', ')}이(가) 두드러져요.`);
+  if (weak.length) parts.push(`${weak.join('·')} 기운이 없어서, 이 부분을 주변 사람이나 환경으로 채우면 균형이 잡힌다고 봅니다.`);
+  if (!parts.length) parts.push('다섯 기운이 고르게 분포되어 있어요.');
+  document.getElementById('ohText').textContent = parts.join(' ');
+}
+
+document.getElementById('form').addEventListener('submit', e => {
+  e.preventDefault();
+  const err = document.getElementById('err');
+  err.textContent = '';
+  const v = document.getElementById('bd').value;
+  if (!v) { err.textContent = '생년월일을 입력해 주세요.'; return; }
+  const [y, m, d] = v.split('-').map(Number);
+  if (y < 1900 || y > 2100) { err.textContent = '1900~2100년 사이만 볼 수 있어요.'; return; }
+  const hv = document.getElementById('bh').value;
+  const hour = hv === '' ? null : Number(hv);
+  const saju = calcSaju(y, m, d, hour);
+  render(saju, hour !== null);
+  const r = document.getElementById('result');
+  r.classList.remove('hidden');
+  r.scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+// 테스트용 노출 (브라우저 콘솔 확인용)
+window.__calcSaju = calcSaju;
+</script>
+</body>
+</html>
