@@ -44,13 +44,14 @@ CATEGORIES = {
         # (정규식, 가중치) — 제목에 걸린 가중치 합이 높을수록 우선. MIN_SCORE 미만은 제외
         "weights": [
             (r"조직문화|기업문화|사내문화|일하는 방식", 10),
-            (r"리더십|세대|MZ|꼰대|소통", 8),
+            (r"리더십|세대갈등|세대 갈등|MZ|꼰대", 8),
+            (r"소통|세대", 3),
             (r"인사제도|인사평가|승진|성과급|임금체계|정년|주4일|주 4일|근로시간|워라밸", 7),
             (r"채용|신입|공채|이직|퇴사|인재|교육훈련|HR", 5),
             (r"노사|노조|임단협|파업|임금협상|복지", 4),
             (r"직장|근로|일자리|고용", 2),
         ],
-        "exclude": r"(연예|스포츠|야구|축구|변호사|검찰|소송|구속|건설 임시|일용직|코스피|부동산)",
+        "exclude": r"(연예|스포츠|야구|축구|변호사|검찰|소송|구속|건설 임시|일용직|코스피|부동산|구청장|시장|군수|지방선거|민선)",
         "gnews": [
             '조직문화 OR 기업문화 OR 세대갈등 when:4d',
             '리더십 OR 인사제도 OR 성과급 when:4d',
@@ -178,8 +179,7 @@ def google_news(query):
     items = parse_rss(fetch(url), "Google 뉴스")
     for it in items:
         s = it["source"]
-        if s and it["title"].endswith(" - " + s):
-            it["title"] = it["title"][: -(len(s) + 3)].strip()
+        it["title"] = re.sub(r"\s+-\s+[^-]{2,15}$", "", it["title"]).strip()
         it["desc"] = ""          # 구글 요약은 제목 복사본이라 버림
         it["via_gnews"] = True
     return items
