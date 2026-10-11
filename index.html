@@ -93,6 +93,10 @@ img { max-width: 100%; display: block; }
 .hero-sub { font-size: 13px; color: rgba(255,255,255,.65); margin-bottom: 20px; }
 .hero-cta-btn { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #111; padding: 11px 20px; border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; transition: background .15s; }
 .hero-cta-btn:hover { background: var(--accent); color: #fff; }
+.hero-cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.hero-cta-btn.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.45); }
+.hero-cta-btn.ghost:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sec-label { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
 .hero-dots { position: absolute; bottom: 22px; left: 24px; z-index: 10; display: flex; align-items: center; gap: 8px; }
 .hero-dot { width: 28px; height: 3px; border-radius: 999px; background: rgba(255,255,255,.35); cursor: pointer; transition: all .3s; }
 .hero-dot.active { background: #fff; width: 44px; }
@@ -421,15 +425,19 @@ img { max-width: 100%; display: block; }
 .wwm-email-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; background: rgba(255,255,255,.08); color: #fff; text-decoration: none; font-size: .88rem; font-weight: 600; border: 1px solid rgba(255,255,255,.15); transition: background .2s; }
 .wwm-email-btn:hover { background: rgba(255,255,255,.15); }
 .wwm-form-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 8px; background: var(--accent); color: #fff; text-decoration: none; font-size: .88rem; font-weight: 700; transition: opacity .2s, transform .2s; }
+.wwm-sub { word-break: keep-all; }
+.wwm-cards .wwm-card { text-align: left; }
+.wwm-num { font-size: 1.5rem; font-weight: 800; font-style: italic; color: var(--accent); margin-bottom: 10px; letter-spacing: -.01em; }
+.wwm-contact { flex-direction: row !important; flex-wrap: wrap; justify-content: center; }
+.wwm-mail { width: 100%; font-size: .78rem; color: #888; user-select: all; }
 .wwm-form-btn:hover { opacity: .88; transform: translateY(-1px); }
 
 /* ── 강의 자료: 제목 카드 ── */
 .lecture-section { margin: 36px 0 8px; }
 .lecture-section-title {
-  font-size: 16px; font-weight: 700; color: #111; margin-bottom: 12px;
-  display: flex; align-items: center; gap: 8px;
+  font-size: 20px; font-weight: 800; color: #111; margin-bottom: 14px;
+  letter-spacing: -.01em;
 }
-.lecture-section-title::before { content: '\1F3A4'; }
 .lec-decks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 @media (min-width: 640px) { .lec-decks { grid-template-columns: repeat(4, 1fr); } }
 @media (min-width: 560px) { .lec-deck-title { font-size: 14px; } .lec-deck-sub { font-size: 11.5px; } }
@@ -615,7 +623,10 @@ img { max-width: 100%; display: block; }
           <div class="hero-label">PeConnecton — Oct 2026</div>
           <div class="hero-title">일상을 기록하고<br>연결을 만들어갑니다</div>
           <div class="hero-sub">경영관리 · 조직문화 · Photography</div>
-          <div class="hero-cta-btn" onclick="navigate('gallery')">Photography →</div>
+          <div class="hero-cta-row">
+            <div class="hero-cta-btn" onclick="navigate('gallery')">Photography →</div>
+            <div class="hero-cta-btn ghost" onclick="goInquiry()">강연·컨설팅 문의</div>
+          </div>
         </div>
       </div>
       <div class="hero-slide">
@@ -777,11 +788,13 @@ img { max-width: 100%; display: block; }
 
   <!-- 강의 자료 뷰어 -->
   <div class="lecture-section">
+    <div class="sec-label">Lecture</div>
     <div class="lecture-section-title">강의 자료</div>
     <div class="lec-decks" id="lecDecks"></div>
   </div>
 
-  <div class="news-section-label" style="margin-top:28px;">최근 글 · Blog</div>
+  <div class="sec-label" style="margin-top:36px;">Blog</div>
+  <div class="lecture-section-title">최근 글</div>
   <div id="aboutBlogList"></div>
 
   <div style="text-align:center;margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
@@ -793,29 +806,31 @@ img { max-width: 100%; display: block; }
   </div>
 
   <!-- Work With Me -->
-  <div class="wwm-section">
-    <div class="wwm-top-label">💼 Work With Me</div>
+  <div class="wwm-section" id="inquiry">
+    <div class="wwm-top-label">Work With Me</div>
     <h2 class="wwm-heading">강연 및 컨설팅 문의</h2>
-    <p class="wwm-sub">15년+ 현장 경영관리 &amp; 조직문화 구축 경험을 바탕으로<br>기업과 개인의 성장을 돕는 맞춤형 솔루션을 제공합니다.</p>
+    <p class="wwm-sub">15년+ 현장 경영관리와 조직문화 구축 경험을 바탕으로 기업과 개인의 성장을 돕는 맞춤형 솔루션을 제공합니다.</p>
     <div class="wwm-cards">
       <div class="wwm-card">
-        <div class="wwm-icon">🏭</div>
+        <div class="wwm-num">01</div>
         <div class="wwm-card-title">Cost Innovation</div>
         <div class="wwm-card-desc">제조업 경영관리 프로세스 구축 &amp; 원가혁신</div>
       </div>
       <div class="wwm-card">
-        <div class="wwm-icon">🤝</div>
+        <div class="wwm-num">02</div>
         <div class="wwm-card-title">조직문화 &amp; HR</div>
         <div class="wwm-card-desc">소조직 리더십 캠프 &amp; HR 프로그램 기획</div>
       </div>
       <div class="wwm-card">
-        <div class="wwm-icon">🎯</div>
+        <div class="wwm-num">03</div>
         <div class="wwm-card-title">커리어 멘토링</div>
         <div class="wwm-card-desc">잇다 멘토 &amp; 직무 상담 · 취업 전략</div>
       </div>
     </div>
     <div class="wwm-contact">
-      <a href="mailto:kimjy0905@gmail.com" class="wwm-email-btn">✉️ kimjy0905@gmail.com</a>
+      <a href="mailto:kimjy0905@gmail.com?subject=%5B%EA%B0%95%EC%97%B0%C2%B7%EC%BB%A8%EC%84%A4%ED%8C%85%20%EB%AC%B8%EC%9D%98%5D" class="wwm-form-btn">강연·컨설팅 문의하기</a>
+      <a href="https://ig.me/m/peconnet_on" target="_blank" rel="noopener" class="wwm-email-btn">Instagram DM</a>
+      <div class="wwm-mail">kimjy0905@gmail.com</div>
     </div>
   </div>
 </div>
@@ -887,6 +902,7 @@ function showToast(msg) {
 
 // Navigation
 const pages = ['gallery','about','news','apps','guestbook'];
+function goInquiry() { navigate('about'); setTimeout(() => { const e = document.getElementById('inquiry'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60); }
 function navigate(id) {
   const hw = document.getElementById('homeWrap');
   const mm = document.getElementById('mobileMenu');
