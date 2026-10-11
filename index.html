@@ -676,7 +676,7 @@ img { max-width: 100%; display: block; }
     <div class="footer-legal">
       <div>kimjy0905@gmail.com</div>
       <div style="margin-top:4px;">Copyright © 2026 PeConnecton. All Rights Reserved.</div>
-      <div style="margin-top:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;">Visited <b style="color:var(--accent);font-weight:700;letter-spacing:.06em;font-variant-numeric:tabular-nums;">95,860</b></div>
+      <div style="margin-top:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;">Visited <b id="visitCount" style="color:var(--accent);font-weight:700;letter-spacing:.06em;font-variant-numeric:tabular-nums;">95,860</b></div>
     </div>
   </footer>
 
@@ -1262,6 +1262,22 @@ async function loadNews(manual) {
 document.getElementById('appReqBtn').href = 'mailto:kimjy0905@gmail.com?subject=' + encodeURIComponent('[역사가 쑥쑥] 다운로드 요청') + '&body=' + encodeURIComponent('이름/소속:\n사용 목적:\n');
 document.getElementById('newsRefreshBtn').addEventListener('click', () => loadNews(true));
 loadNews(false);
+
+// ── 방문자 카운터 (95,860에서 시작 · 같은 브라우저는 하루 1회만 집계) ──
+(function () {
+  const el = document.getElementById('visitCount'); if (!el) return;
+  const API = 'https://abacus.jasoncameron.dev/%s/peconnecton-mrkimjy/visits';
+  const today = new Date().toISOString().slice(0, 10);
+  let seen = false;
+  try { seen = localStorage.getItem('visitDay') === today; } catch (e) {}
+  fetch(API.replace('%s', seen ? 'get' : 'hit'))
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(d => {
+      if (typeof d.value === 'number') el.textContent = d.value.toLocaleString('en-US');
+      if (!seen) { try { localStorage.setItem('visitDay', today); } catch (e) {} }
+    })
+    .catch(() => {});
+})();
 
 // ── GUESTBOOK ──
 const gbEntries = [
