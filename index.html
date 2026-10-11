@@ -88,7 +88,7 @@ img { max-width: 100%; display: block; }
   position: absolute; z-index: 6; pointer-events: none;
   top: clamp(52px, 19%, 150px); right: clamp(24px, 4vw, 72px);
   width: min(46%, 560px);
-  display: none; flex-direction: column; align-items: flex-end;
+  display: flex; flex-direction: column; align-items: flex-end;
   text-align: right;
   font-family: -apple-system, 'SF Pro Display', BlinkMacSystemFont, 'Helvetica Neue', var(--font);
   -webkit-font-smoothing: antialiased;
@@ -151,7 +151,14 @@ img { max-width: 100%; display: block; }
 @keyframes typoIn { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
 @keyframes typoCaret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 
-@media (min-width: 860px) { .hero-typo { display: flex; } }
+/* 모바일: 히어로 상단 빈 공간에 노출 */
+@media (max-width: 859px) {
+  .hero-typo { top: clamp(28px, 9%, 70px); right: 20px; left: 20px; width: auto; }
+  .hero-typo-stage { font-size: clamp(30px, 9.4vw, 46px); }
+  .hero-typo-meaning { height: auto; min-height: 3.2em; font-size: 12.5px; }
+  .hero-typo-meaning span { white-space: normal; }
+  .hero-typo-rule { max-width: 120px; }
+}
 @media (max-height: 620px) { .hero-typo { top: 40px; } }
 @media (prefers-reduced-motion: reduce) {
   .hero-typo-kicker, .hero-typo-stage, .hero-typo-rule, .hero-typo-index { animation: none; }
