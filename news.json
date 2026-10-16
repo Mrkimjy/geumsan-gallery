@@ -1,17 +1,8 @@
 {
- "updated": "2026.10.16 08:18",
+ "updated": "2026.10.17 08:20",
  "HR": [
   {
    "emoji": "👥",
-   "source": "선데이뉴스신문",
-   "headline": "보성군, MZ 공직자 260명 한자리에…소통·협력으로 조직문화 바꾼다",
-   "summary": "선데이뉴스신문 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.10.15",
-   "isNew": true,
-   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9GWlgtRVlYTk5MQ01tMi02ZTByS0s3d1FaMVh1aEVmUDczWVdsbmxmNHJ3QjlVWlNUS2NvUlhuNUE0S1hqcXlJZENXVnVEZzRGd0hQSURZaXJLaFht?oc=5"
-  },
-  {
-   "emoji": "🤝",
    "source": "시사의창",
    "headline": "해군교육사령부 창설 80주년, ‘리스펙 리더십’으로 조직문화 새롭게 만든다",
    "summary": "시사의창 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
@@ -20,71 +11,80 @@
    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8tTVdVNEpMNVRNYnljNzV4YW5VVEVHeUs5SHdrQnc4blpuV1ZWbmVWUEs5YzNnTWd6Q2FwRzNha3JVX3QteUFSa19OUmNITnMzMElUZQ?oc=5"
   },
   {
+   "emoji": "🤝",
+   "source": "브릿지경제",
+   "headline": "금호타이어, 현장 리더십 전진 배치⋯ 16일부로 임원 6명 승진 단행",
+   "summary": "브릿지경제 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.10.16",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1EcEdCaUE1WjBLUjJkT0ZrMFlBN3l6TnFQdExNVHBwSVgyRmFIdUFUUHJRRDJZOFk4dG5lanZXZzRtcHRrb1VZWmh5WUYzNmN1S3FCNTlGaHdhQQ?oc=5"
+  },
+  {
    "emoji": "🎓",
-   "source": "비즈월드",
-   "headline": "[CEO+] \"기업문화는 구호 아닌 실행\"…조현범 회장, 젊은 인재들과 '바텀업 혁신'",
-   "summary": "비즈월드 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.10.14",
-   "isNew": false,
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE85TFFweHhoN1hYT1FFNGFXNGQ2dlJvV1ZKSlhVZHNBdVYwMDAxY0llcFdDT0hNbzQ4bWo5Szdub2RfbjZYdkxTQzl1bzdCTlZQc1c4RjhJNHNkYVZocEZNV293NGwtQTRJSEhv?oc=5"
+   "source": "완주신문",
+   "headline": "완주군 6·7급 승진자 리더십 아카데미",
+   "summary": "완주신문 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.10.16",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB0Y0ZzTUNyMlkybF9kRW5mTGNyWm9WMkIyNjdVb1hkMEdzby1URUtsS0hLNFFkV0RYeGMtX29JU01IcmZoOXoyV3I2cUJCUmVkMEo4c0ZJZ2JyRWtidllV?oc=5"
   }
  ],
  "Tire": [
   {
    "emoji": "🛞",
-   "source": "대한경제",
-   "headline": "[CAR 브리프] 한국타이어ㆍ에스오에스랩ㆍ폭스바겐ㆍEVSISㆍ타타대우모빌리티ㆍ차즘ㆍ스트라드비젼ㆍ한국자동차…",
-   "summary": "대한경제 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.10.14",
-   "isNew": false,
-   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5IeHdtbUo3RWJNVjFrUTlPU1NIZUdOczJ6RlEtR1B3dmppSF9VSU5TREJrZjEySkdHZFlVOXp4OUlZbzBkYk45djFWeGtGeXNVTWlLQ2ZOMUEwWDJ1UmJvT2lSYWtxNndHbmFMaDhabzdBRzg?oc=5"
+   "source": "파이낸셜리뷰",
+   "headline": "[오늘의 모빌리티] 기아·KGM·한국타이어·금호타이어",
+   "summary": "파이낸셜리뷰 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.10.16",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE42cThnN0NMaWVwaVhydmxwbmptc3FobDNEOWVzZE1lbWstTXVEVXFneDc3TmloeWJIRFI0QzF3NDVXTzVOeGFaeHc0TDFqVzB1RHJyY2tmNzRDMWNpeUJiRGo1YjJVNUVvbEY4NUN0WjI2bEpE?oc=5"
   },
   {
    "emoji": "🚗",
-   "source": "시장경제신문",
-   "headline": "현대차, 인도 판매 1000만대 눈앞... 한국타이어, 고트럭 제휴 판촉 외[시경Today-자동차]",
-   "summary": "시장경제신문 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.10.12",
-   "isNew": false,
-   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE82V3I4NUxZbnpORDE4TV9DdXM3X0h0TUR0UE54SjRFcEh6bkQxMUx5RjhzT3k4NnVOUFFqSTh0N21Ib3pweFlEQWdxNDcwaDhQRFE0UFk5MkF5em9GcVdBbGJ4TnRoSWV3Mk5sSlIwaXM?oc=5"
+   "source": "엠투데이",
+   "headline": "한국타이어, 레드닷 최우수상 2관왕⋯비공기입 타이어·의료 모빌리티 인정",
+   "summary": "엠투데이 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.10.16",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBLVnRvQjQ5YXhDTjFYczRNS190cFZsdG5hZ2IxXzhUeTRoMFNyNVRvSmFhU3h2ekRPMjZxVjdyN0tKQ1FsQ1IwdE5fQTJVWm1OSXIyUktwTTFLVGJqQS1xVkNDNU45NElTMjd1M0x1dw?oc=5"
   },
   {
    "emoji": "🏭",
-   "source": "더게이트",
-   "headline": "“전기차 타이어 3년 연속 정상”…한국타이어, 英 왓타이어 어워드 11개 제품 수상",
-   "summary": "더게이트 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.10.14",
-   "isNew": false,
-   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBDaGI2cE5VV1RvelUxVlRSM1JsNGh6ZGVXdjQ2YV9CLTdHcTVHMDZlOEVrQ3l0ZV9QQTVrLUU4TEoxSnE2UU16NUp1OFdfQk5mZjBYcEt4VlNHNFZCMkh6TnhjN0JkOTBMUjB2ZtIBbEFVX3lxTFBDaGI2cE5VV1RvelUxVlRSM1JsNGh6ZGVXdjQ2YV9CLTdHcTVHMDZlOEVrQ3l0ZV9QQTVrLUU4TEoxSnE2UU16NUp1OFdfQk5mZjBYcEt4VlNHNFZCMkh6TnhjN0JkOTBMUjB2Zg?oc=5"
+   "source": "직썰",
+   "headline": "한국타이어, 비공기입 타이어·의료 모빌리티로 레드닷 최우수상 수상",
+   "summary": "직썰 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.10.16",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBXdWpFd1FfamF5dllCMmk0dVRoQXMzMko5clQxZWpSOVpLSHdHejRDR3VVek0zUEpyUmY0aUZYU0ZPLUNDUENxaDlvZkt0M192cW1yRE5ocnMtWWNybTkwV3BzeDcxcWwy0gFsQVVfeXFMTWNaY0tMRW5YREpoUlVCZ1ZrcmhZU3hwNWhKMHAwQjltQ0R4ck5tZDFUSTNCTExSaTd6XzJaVHQ0cVVqSWhNY29RU3JQVzFXZU9jUzU0LUlfc3BLYmh2WG9NT1JmNVlaMGEyM1N5?oc=5"
   }
  ],
  "Econ": [
   {
    "emoji": "📈",
-   "source": "경향신문",
-   "headline": "증시 꺾이고 부동산 거래 줄자 가계대출 올해 들어 첫 순감",
-   "summary": "경향신문 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.10.15",
+   "source": "매일경제",
+   "headline": "“증시 폭등 없었으면 폭락도 없었다”…국민연금 국조 꺼내든 국힘",
+   "summary": "코스피가 10월 들어 연일 폭락하며 5600대로 내려앉자 국민의힘이 국민연금 기금 운용에 대한 국정조사 카드를 꺼내들었다. 개인투자자 다수가 주가 하락으로 피해를 본 상황에서 그 ..",
+   "date": "2026.10.16",
    "isNew": true,
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5LWUhGTk9xWTI0QmEzMmJOVXJnVmUwWGxCWUJpblZVTUxpZTRCM1hocEVfc1RJZXpoa0hZbHllTGJ3WVc4VWE5a1RaZGJFVGRLc2JBemFEeGpaZ9IBX0FVX3lxTE9kOUJoNlB2LU5Oc21fQzJLcHBYN1ZSNTNTVDBvR1FRRjlPMW5kZ3I1YjNKTXNQYW5TNEZpakM2YW1pYzdNZkxaZjZ6cy02YjEyLS1rbEJaQnVJZ01YUklJ?oc=5"
+   "url": "https://www.mk.co.kr/news/politics/12178257"
   },
   {
    "emoji": "💰",
-   "source": "연합뉴스",
-   "headline": "주담대 변동금리 또 오른다…코픽스 3년 10개월만 최대폭 상승(종합)",
-   "summary": "기준금리와 시장금리 상승 영향으로 은행권 주택담보대출 변동금리의 기준인 코픽스(COFIX·자금조달비용지...",
-   "date": "2026.10.15",
+   "source": "매일경제",
+   "headline": "“여보, 애들 학원 좀 줄이자”…주담대 변동금리 줄줄이 6% 돌파",
+   "summary": "코픽스 4년만에 최대폭 상승 KB·우리銀, 금리 6%로 쑥 변동금리 대출자들 초비상금리 인상 국면에 접어들며 주요 시중은행들의 주택담보대출 변동금리 상단이 잇달아 6%대를 넘어서고..",
+   "date": "2026.10.16",
    "isNew": true,
-   "url": "https://www.yna.co.kr/view/AKR20261015126751002"
+   "url": "https://www.mk.co.kr/news/economy/12178167"
   },
   {
    "emoji": "🏦",
    "source": "연합뉴스",
-   "headline": "주담대 변동금리 또 오른다…9월 코픽스 0.25%p↑",
-   "summary": "기준금리와 시장금리 상승 영향으로 은행권 주택담보대출 변동금리의 기준인 코픽스(COFIX·자금조달비용지수)가 ...",
-   "date": "2026.10.15",
+   "headline": "블록체인에 올라탄 미국 국채·기업대출…토큰화 시장 391억달러",
+   "summary": "주식과 채권 등 실물·금융자산을 블록체인 기반 디지털 자산으로 전환하는 토큰화 시장이 391억달러 규모로 성장...",
+   "date": "2026.10.16",
    "isNew": true,
-   "url": "https://www.yna.co.kr/view/AKR20261015126700002"
+   "url": "https://www.yna.co.kr/view/AKR20261016058600017"
   }
  ]
 }
