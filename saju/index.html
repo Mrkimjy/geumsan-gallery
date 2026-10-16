@@ -7,7 +7,7 @@
 <meta name="description" content="생년월일과 태어난 시간으로 사주 네 기둥을 뽑아 보는 재미있는 사주 풀이 페이지">
 <meta name="robots" content="index, follow">
 <style>
-  :root { --bg:#0A0A0A; --card:#141414; --line:#262626; --fg:#F2F2F2; --sub:#8A8A8A; --accent:#FC6A10; }
+  :root { --bg:#0A0A0A; --card:#141414; --line:#262626; --fg:#F2F2F2; --sub:#A3A3A3; --accent:#FC6A10; }
   * { box-sizing: border-box; margin: 0; }
   html, body { background: var(--bg); color: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
   body { padding: 0 16px; padding-block: 24px 60px; line-height: 1.6; }
@@ -29,7 +29,7 @@
   .err { color: #ff6b6b; font-size: 13px; min-height: 18px; margin-top: 10px; }
   .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 6px; }
   .pillar { background: #0E0E0E; border: 1px solid var(--line); border-radius: 12px; padding: 12px 6px; text-align: center; }
-  .pillar .k { font-size: 11px; color: var(--sub); letter-spacing: .08em; }
+  .pillar .k { font-size: 12px; color: var(--sub); letter-spacing: .08em; }
   .pillar .hj { font-size: 30px; font-weight: 800; line-height: 1.15; margin: 6px 0 2px; }
   .pillar .kr { font-size: 12px; color: var(--sub); }
   .pillar.me { border-color: var(--accent); }
@@ -40,7 +40,7 @@
   h2 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
   .kw { font-size: 14px; color: #d8d8d8; word-break: keep-all; }
   .tag { display: inline-block; font-size: 12px; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
-  .note { font-size: 12px; color: #6d6d6d; line-height: 1.6; margin-top: 14px; word-break: keep-all; }
+  .note { font-size: 12px; color: #A3A3A3; line-height: 1.6; margin-top: 14px; word-break: keep-all; }
   .hidden { display: none; }
 </style>
 </head>
@@ -234,7 +234,7 @@ function render(saju, hasHour) {
   const weak = OH.filter(k => cnt[k] === 0);
   document.getElementById('tags').innerHTML =
     strong.map(k => `<span class="tag">강한 기운: ${k}</span>`).join('') +
-    weak.map(k => `<span class="tag" style="border-color:#444;color:#888">부족한 기운: ${k}</span>`).join('');
+    weak.map(k => `<span class="tag" style="border-color:#444;color:#A3A3A3">부족한 기운: ${k}</span>`).join('');
   const parts = [];
   if (strong.length) parts.push(`${strong.join('·')} 기운이 강해 ${strong.map(k => OH_TEXT[k]).join(', ')}이(가) 두드러져요.`);
   if (weak.length) parts.push(`${weak.join('·')} 기운이 없어서, 이 부분을 주변 사람이나 환경으로 채우면 균형이 잡힌다고 봅니다.`);
