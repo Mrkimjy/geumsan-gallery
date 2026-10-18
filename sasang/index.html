@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>사상체질 자가진단 · PeConnecton</title>
-<meta name="description" content="20문항 설문으로 보는 사상체질(태양인·태음인·소양인·소음인) 자가진단. 참고용 콘텐츠입니다.">
+<meta name="description" content="40문항 설문으로 보는 사상체질(태양인·태음인·소양인·소음인) 자가진단. 참고용 콘텐츠입니다.">
 <meta name="robots" content="index, follow">
 <style>
   :root { --bg:#0A0A0A; --card:#141414; --line:#262626; --fg:#F2F2F2; --sub:#A3A3A3; --accent:#FC6A10; }
@@ -58,7 +58,7 @@
 <div class="wrap">
   <a class="back" href="../">← PeConnecton으로 돌아가기</a>
   <h1><span>사상체질</span> 자가진단</h1>
-  <div class="sub">20개 문항으로 태양인 · 태음인 · 소양인 · 소음인 중 나와 가까운 체질을 알아봅니다. 평소 모습에 가까운 쪽을 골라 주세요.</div>
+  <div class="sub">40개 문항으로 태양인 · 태음인 · 소양인 · 소음인 중 나와 가까운 체질을 알아봅니다. 평소 모습에 가까운 쪽을 골라 주세요.</div>
 
   <div class="card" id="intro">
     <div class="desc" style="margin-bottom:18px">체형, 성격, 소화, 땀, 추위·더위에 대한 질문입니다. "매우 아니다"부터 "매우 그렇다"까지 고르면 됩니다.</div>
@@ -118,7 +118,27 @@ const QUESTIONS = [
   {t:'식욕이 좋고 무엇이든 잘 먹는다.', c:'TE'},
   {t:'사교적이고 남의 일에도 잘 나서는 편이다.', c:'SY'},
   {t:'따뜻한 음식이 편하고, 찬 음식을 먹으면 탈이 잘 난다.', c:'SE'},
-  {t:'기름진 음식보다 담백하고 시원한 음식이 몸에 맞는다.', c:'TY'}
+  {t:'기름진 음식보다 담백하고 시원한 음식이 몸에 맞는다.', c:'TY'},
+  {t:'목소리가 굵고 울림이 있는 편이다.', c:'TE'},
+  {t:'말이 빠르고 생각나는 대로 바로 말하는 편이다.', c:'SY'},
+  {t:'낯선 사람 앞에서는 말수가 적어지는 편이다.', c:'SE'},
+  {t:'처음 만난 사람과도 거리낌 없이 이야기를 이끈다.', c:'TY'},
+  {t:'피부가 두꺼운 편이고 모공이 큰 편이다.', c:'TE'},
+  {t:'얼굴이 쉽게 붉어지고 더위를 많이 탄다.', c:'SY'},
+  {t:'한번 마음이 상하면 오래 담아 두는 편이다.', c:'SE'},
+  {t:'세부 계획보다 큰 방향을 먼저 정하고 나머지는 나중에 채운다.', c:'TY'},
+  {t:'감정을 겉으로 잘 드러내지 않는 편이다.', c:'TE'},
+  {t:'밥을 빨리 먹는 편이다.', c:'SY'},
+  {t:'목소리가 작고 차분한 편이다.', c:'SE'},
+  {t:'오래 서 있거나 걸으면 다리가 쉽게 피곤해진다.', c:'TY'},
+  {t:'무언가를 모으고 쌓아 두는 것을 좋아한다.', c:'TE'},
+  {t:'기쁨이나 짜증 같은 감정 변화가 얼굴에 바로 드러난다.', c:'SY'},
+  {t:'입맛이 없을 때가 많고 식사량이 적은 편이다.', c:'SE'},
+  {t:'소변을 시원하게 잘 보면 몸 상태가 좋다고 느낀다.', c:'TY'},
+  {t:'땀이 잘 안 나는 날은 몸이 무겁고 답답하다.', c:'TE'},
+  {t:'변비가 생기면 몸 전체가 답답하고 힘들다.', c:'SY'},
+  {t:'긴장하면 배가 아프거나 소화가 잘 안 된다.', c:'SE'},
+  {t:'일이 뜻대로 안 되면 쉽게 분통이 터진다.', c:'TY'}
 ];
 const TYPES = {
   TY:{n:'태양인', h:'太陽人', k:['추진력','독창성','리더십'],
@@ -174,11 +194,11 @@ $('prevBtn').addEventListener('click', () => { if (idx > 0) { idx--; renderQ(); 
 $('retryBtn').addEventListener('click', () => { answers.fill(null); show('intro'); });
 
 function finish() {
-  // 체질별 5문항, 점수 합 5~25 → 0~100%
+  // 체질별 10문항, 점수 합 10~50 → 0~100%
   const sum = {TY:0, TE:0, SY:0, SE:0};
   QUESTIONS.forEach((q, i) => { sum[q.c] += answers[i]; });
   const pct = {};
-  ORDER.forEach(c => pct[c] = Math.round((sum[c] - 5) / 20 * 100));
+  ORDER.forEach(c => pct[c] = Math.round((sum[c] - 10) / 40 * 100));
   // 최고점 체질. 동점이면 태양인은 드문 체질이라 뒤로 미룸
   const ranked = ORDER.slice().sort((a, b) => (sum[b] - sum[a]) || ((a === 'TY') - (b === 'TY')));
   const top = ranked[0], second = ranked[1];
@@ -186,7 +206,7 @@ function finish() {
   $('bar').style.width = '100%';
   $('rType').textContent = t.n;
   let nick = t.h;
-  if (sum[top] - sum[second] <= 1) nick += ' · ' + TYPES[second].n + ' 성향도 함께 보여요';
+  if (sum[top] - sum[second] <= 2) nick += ' · ' + TYPES[second].n + ' 성향도 함께 보여요';
   $('rNick').textContent = nick;
   $('rKw').innerHTML = t.k.map(k => `<span class="tag">${k}</span>`).join('');
   $('rDesc').textContent = t.d;
