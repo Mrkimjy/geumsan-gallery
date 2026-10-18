@@ -1563,7 +1563,7 @@ function gbColor(name) { let h = 0; for (const ch of name) h = (h * 31 + ch.char
 function gbDate(iso) { const d = new Date(iso); return isNaN(d) ? '' : d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0'); }
 async function gbLoad() {
   try {
-    const r = await fetch(GB_URL + '?select=name,message,created_at&order=created_at.desc&limit=200', { headers: { apikey: GB_KEY, Authorization: 'Bearer ' + GB_KEY } });
+    const r = await fetch(GB_URL + '?select=name,message,created_at&order=created_at.desc&limit=200', { headers: { apikey: GB_KEY } });
     if (!r.ok) throw new Error(r.status);
     const rows = await r.json();
     gbRemote = rows.map(x => ({ name: x.name, color: gbColor(x.name), date: gbDate(x.created_at), msg: x.message }));
@@ -1588,13 +1588,15 @@ document.getElementById('gbBtn').addEventListener('click', async () => {
   if (!msg) { showToast('메시지를 입력해주세요'); return; }
   const btn = document.getElementById('gbBtn'); btn.disabled = true;
   try {
-    const r = await fetch(GB_URL, { method: 'POST', headers: { apikey: GB_KEY, Authorization: 'Bearer ' + GB_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ name, message: msg }) });
+    const r = await fetch(GB_URL, { method: 'POST', headers: { apikey: GB_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ name, message: msg }) });
     if (!r.ok) throw new Error(r.status);
     document.getElementById('gbName').value = '';
     document.getElementById('gbPwd').value = '';
     document.getElementById('gbMsg').value = '';
-    await gbLoad();
+    gbRemote.unshift({ name, color: gbColor(name), date: gbDate(new Date().toISOString()), msg });
+    renderGb();
     showToast('방명록이 등록됐어요 ✍️');
+    gbLoad();
   } catch (err) {
     showToast('등록에 실패했어요. 잠시 후 다시 시도해 주세요');
   } finally { btn.disabled = false; }
