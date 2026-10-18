@@ -1548,33 +1548,56 @@ loadNews(false);
     .catch(() => {});
 })();
 
-// ── GUESTBOOK ──
-const gbEntries = [
+// ── GUESTBOOK (Supabase: geumsan_guestbook) ──
+const GB_URL = 'https://tcwlatoamsvocmntahvg.supabase.co/rest/v1/geumsan_guestbook';
+const GB_KEY = 'sb_publishable_rrfLU84j9vPTCqy8cmuD0A_unfAYFDB';
+const GB_COLORS = ['#2f54eb','#722ed1','#17a750','#d48806','#FC6A10'];
+const gbSeed = [
   { name:'이수진', color:'#2f54eb', date:'2026.10.09', msg:'항상 좋은 글 감사해요! 덕분에 조직문화에 대해 많이 배우고 있습니다 😊' },
   { name:'박민호', color:'#722ed1', date:'2026.10.07', msg:'금산공장 선배님 블로그 보고 많은 도움 받았어요. 앞으로도 잘 부탁드립니다!' },
   { name:'잇다 멘티', color:'#17a750', date:'2026.10.03', msg:'멘토링 감사합니다. 덕분에 취업 준비 방향이 잡혔어요 🙏' },
 ];
+let gbRemote = [];
+function gbEsc(t) { return String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function gbColor(name) { let h = 0; for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return GB_COLORS[h % GB_COLORS.length]; }
+function gbDate(iso) { const d = new Date(iso); return isNaN(d) ? '' : d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0'); }
+async function gbLoad() {
+  try {
+    const r = await fetch(GB_URL + '?select=name,message,created_at&order=created_at.desc&limit=200', { headers: { apikey: GB_KEY, Authorization: 'Bearer ' + GB_KEY } });
+    if (!r.ok) throw new Error(r.status);
+    const rows = await r.json();
+    gbRemote = rows.map(x => ({ name: x.name, color: gbColor(x.name), date: gbDate(x.created_at), msg: x.message }));
+  } catch (err) { gbRemote = []; }
+  renderGb();
+}
 function renderGb() {
+  const all = [...gbRemote, ...gbSeed];
   const list = document.getElementById('gbList'); list.innerHTML = '';
-  document.getElementById('gbCount').textContent = gbEntries.length + '개의 메시지';
-  gbEntries.forEach(g => {
+  document.getElementById('gbCount').textContent = all.length + '개의 메시지';
+  all.forEach(g => {
     const el = document.createElement('div'); el.className = 'gb-item';
-    el.innerHTML = `<div class="gb-top"><div class="gb-avatar" style="background:${g.color}">${g.name[0]}</div><div class="gb-name">${g.name}</div><div class="gb-date">${g.date}</div></div><div class="gb-msg">${g.msg}</div>`;
+    el.innerHTML = `<div class="gb-top"><div class="gb-avatar" style="background:${g.color}">${gbEsc(g.name[0])}</div><div class="gb-name">${gbEsc(g.name)}</div><div class="gb-date">${gbEsc(g.date)}</div></div><div class="gb-msg">${gbEsc(g.msg)}</div>`;
     list.appendChild(el);
   });
 }
 renderGb();
-document.getElementById('gbBtn').addEventListener('click', () => {
-  const name = document.getElementById('gbName').value.trim() || '익명';
-  const msg = document.getElementById('gbMsg').value.trim();
+gbLoad();
+document.getElementById('gbBtn').addEventListener('click', async () => {
+  const name = document.getElementById('gbName').value.trim().slice(0, 20) || '익명';
+  const msg = document.getElementById('gbMsg').value.trim().slice(0, 300);
   if (!msg) { showToast('메시지를 입력해주세요'); return; }
-  const colors = ['#2f54eb','#722ed1','#17a750','#d48806','#FC6A10'];
-  gbEntries.unshift({ name, color: colors[Math.floor(Math.random()*colors.length)], date: new Date().toLocaleDateString('ko-KR'), msg });
-  document.getElementById('gbName').value = '';
-  document.getElementById('gbPwd').value = '';
-  document.getElementById('gbMsg').value = '';
-  renderGb();
-  showToast('방명록이 등록됐어요 ✍️');
+  const btn = document.getElementById('gbBtn'); btn.disabled = true;
+  try {
+    const r = await fetch(GB_URL, { method: 'POST', headers: { apikey: GB_KEY, Authorization: 'Bearer ' + GB_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ name, message: msg }) });
+    if (!r.ok) throw new Error(r.status);
+    document.getElementById('gbName').value = '';
+    document.getElementById('gbPwd').value = '';
+    document.getElementById('gbMsg').value = '';
+    await gbLoad();
+    showToast('방명록이 등록됐어요 ✍️');
+  } catch (err) {
+    showToast('등록에 실패했어요. 잠시 후 다시 시도해 주세요');
+  } finally { btn.disabled = false; }
 });
 
 
