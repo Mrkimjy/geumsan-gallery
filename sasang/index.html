@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>사상체질 자가진단 · PeConnecton</title>
+<meta name="description" content="20문항 설문으로 보는 사상체질(태양인·태음인·소양인·소음인) 자가진단. 참고용 콘텐츠입니다.">
+<meta name="robots" content="index, follow">
+<style>
+  :root { --bg:#0A0A0A; --card:#141414; --line:#262626; --fg:#F2F2F2; --sub:#A3A3A3; --accent:#FC6A10; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: var(--bg); color: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+  body { padding: 0 16px; padding-block: 24px 60px; line-height: 1.6; }
+  .wrap { max-width: 560px; margin: 0 auto; }
+  a.back { color: var(--sub); text-decoration: none; font-size: 13px; }
+  a.back:hover { color: var(--accent); }
+  h1 { font-size: 28px; font-weight: 800; margin: 18px 0 6px; }
+  h1 span { color: var(--accent); }
+  .sub { color: var(--sub); font-size: 14px; margin-bottom: 22px; word-break: keep-all; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+  .btn { width: 100%; background: var(--accent); color: #fff; border: 0; border-radius: 999px; padding: 14px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .btn.ghost { background: transparent; border: 1px solid var(--line); color: var(--sub); }
+  .prog { height: 6px; background: #1E1E1E; border-radius: 999px; overflow: hidden; margin-bottom: 10px; }
+  .prog i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+  .count { font-size: 12px; color: var(--sub); margin-bottom: 18px; }
+  .q { font-size: 19px; font-weight: 700; line-height: 1.5; min-height: 84px; word-break: keep-all; margin-bottom: 18px; }
+  .scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .scale button { background: #0E0E0E; border: 1px solid var(--line); color: var(--fg); border-radius: 12px; padding: 14px 0; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .scale button:hover, .scale button.on { border-color: var(--accent); color: var(--accent); }
+  .scale-lbl { display: flex; justify-content: space-between; font-size: 12px; color: #A3A3A3; margin-top: 8px; }
+  .nav { display: flex; gap: 8px; margin-top: 20px; }
+  .nav .btn { flex: 1; }
+  .type { font-size: 56px; font-weight: 900; color: var(--accent); letter-spacing: .04em; text-align: center; margin: 8px 0 4px; }
+  .nick { text-align: center; font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+  .kw { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 16px; }
+  .tag { font-size: 12px; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 3px 10px; }
+  .desc { font-size: 15px; color: #d8d8d8; word-break: keep-all; text-align: center; }
+  .axes { margin-top: 18px; }
+  .axis { display: grid; grid-template-columns: 34px 1fr 34px; gap: 8px; align-items: center; font-size: 12px; color: var(--sub); margin: 8px 0; }
+  .axis .track { position: relative; height: 8px; background: #1E1E1E; border-radius: 999px; }
+  .axis .dot { position: absolute; top: -3px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); transform: translateX(-50%); }
+  .axis .mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: #444; }
+  .note { font-size: 12px; color: #A3A3A3; line-height: 1.6; margin-top: 14px; word-break: keep-all; text-align: center; }
+  .hidden { display: none; }
+  .bars { margin-top: 18px; }
+  .bar-row { display: grid; grid-template-columns: 56px 1fr 40px; gap: 8px; align-items: center; font-size: 13px; color: var(--sub); margin: 8px 0; }
+  .bar-row .track { height: 8px; background: #1E1E1E; border-radius: 999px; overflow: hidden; }
+  .bar-row .fill { height: 100%; background: #444; border-radius: 999px; }
+  .bar-row.top .fill { background: var(--accent); }
+  .bar-row.top span:first-child { color: var(--fg); font-weight: 700; }
+  .sec { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .sec h3 { font-size: 14px; color: var(--accent); margin-bottom: 6px; }
+  .sec p { font-size: 14px; color: #d8d8d8; word-break: keep-all; }
+  .type { font-size: 44px; letter-spacing: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← PeConnecton으로 돌아가기</a>
+  <h1><span>사상체질</span> 자가진단</h1>
+  <div class="sub">20개 문항으로 태양인 · 태음인 · 소양인 · 소음인 중 나와 가까운 체질을 알아봅니다. 평소 모습에 가까운 쪽을 골라 주세요.</div>
+
+  <div class="card" id="intro">
+    <div class="desc" style="margin-bottom:18px">체형, 성격, 소화, 땀, 추위·더위에 대한 질문입니다. "매우 아니다"부터 "매우 그렇다"까지 고르면 됩니다.</div>
+    <button class="btn" id="startBtn">진단 시작</button>
+  </div>
+
+  <div class="card hidden" id="quiz">
+    <div class="prog"><i id="bar" style="width:0%"></i></div>
+    <div class="count" id="cnt"></div>
+    <div class="q" id="qText"></div>
+    <div class="scale" id="scale">
+      <button data-v="1">매우<br>아니다</button>
+      <button data-v="2">아니다</button>
+      <button data-v="3">보통</button>
+      <button data-v="4">그렇다</button>
+      <button data-v="5">매우<br>그렇다</button>
+    </div>
+    <div class="nav">
+      <button class="btn ghost" id="prevBtn" style="flex:0 0 96px">이전</button>
+    </div>
+  </div>
+
+  <div class="card hidden" id="result">
+    <div class="type" id="rType"></div>
+    <div class="nick" id="rNick"></div>
+    <div class="kw" id="rKw"></div>
+    <div class="desc" id="rDesc"></div>
+    <div class="bars" id="rBars"></div>
+    <div class="sec"><h3>체형 특징</h3><p id="rBody"></p></div>
+    <div class="sec"><h3>건강 관리 포인트</h3><p id="rHealth"></p></div>
+    <div class="sec"><h3>잘 맞는다고 알려진 음식</h3><p id="rGood"></p></div>
+    <div class="sec"><h3>조심하면 좋은 음식</h3><p id="rBad"></p></div>
+    <div style="margin-top:20px"><button class="btn ghost" id="retryBtn">다시 진단하기</button></div>
+    <div class="note">※ 설문으로 보는 참고용 자가진단입니다. 정확한 체질 판별과 치료는 한의사 진료를 받으세요. 질환이 있거나 약을 드시는 중이라면 식단을 바꾸기 전에 전문가와 상담하세요.</div>
+  </div>
+</div>
+
+<script>
+// t = 문항, c = 문항이 가리키는 체질 (TY 태양인, TE 태음인, SY 소양인, SE 소음인)
+const QUESTIONS = [
+  {t:'체격이 크고 살이 잘 찌는 편이다.', c:'TE'},
+  {t:'행동이 빠르고 성격이 급한 편이다.', c:'SY'},
+  {t:'체격이 작고 마른 편이며 손발이 찬 편이다.', c:'SE'},
+  {t:'추진력이 강해 새로운 일을 과감하게 밀어붙인다.', c:'TY'},
+  {t:'땀을 많이 흘리는 편이고, 땀을 흘리고 나면 개운하다.', c:'TE'},
+  {t:'몸에 열이 많아 찬 음식이나 찬물이 잘 맞는다.', c:'SY'},
+  {t:'소화가 약해 조금만 과식해도 속이 더부룩하다.', c:'SE'},
+  {t:'남의 시선보다 내 판단과 소신을 따르는 편이다.', c:'TY'},
+  {t:'한번 시작한 일은 끈기 있게 오래 붙잡는다.', c:'TE'},
+  {t:'일을 잘 벌이지만 마무리가 약할 때가 있다.', c:'SY'},
+  {t:'꼼꼼하고 세심하며 걱정이 많은 편이다.', c:'SE'},
+  {t:'목덜미와 머리 쪽이 발달하고 허리 아래는 상대적으로 약한 편이다.', c:'TY'},
+  {t:'변화보다 익숙한 것이 편하고 결정이 느린 편이다.', c:'TE'},
+  {t:'가슴과 어깨가 발달하고 엉덩이와 하체는 가벼운 편이다.', c:'SY'},
+  {t:'땀을 많이 흘리면 기운이 쭉 빠진다.', c:'SE'},
+  {t:'화가 나면 참기보다 바로 드러내는 편이다.', c:'TY'},
+  {t:'식욕이 좋고 무엇이든 잘 먹는다.', c:'TE'},
+  {t:'사교적이고 남의 일에도 잘 나서는 편이다.', c:'SY'},
+  {t:'따뜻한 음식이 편하고, 찬 음식을 먹으면 탈이 잘 난다.', c:'SE'},
+  {t:'기름진 음식보다 담백하고 시원한 음식이 몸에 맞는다.', c:'TY'}
+];
+const TYPES = {
+  TY:{n:'태양인', h:'太陽人', k:['추진력','독창성','리더십'],
+    d:'앞을 내다보고 과감하게 밀고 나가는 타입. 소신이 뚜렷하고 새로운 일을 여는 힘이 있지만, 뜻대로 안 될 때 화가 쉽게 올라올 수 있습니다.',
+    body:'머리와 목덜미, 가슴 윗부분이 발달하고 허리 아래와 하체는 상대적으로 약한 편으로 알려져 있습니다. 네 체질 가운데 가장 드문 체질로 꼽힙니다.',
+    health:'하체와 허리가 약해지기 쉬워 오래 걷기·하체 운동이 도움이 됩니다. 화를 다스리고 과로를 피하는 것이 기본입니다.',
+    good:'메밀, 새우·조개·굴 같은 해산물, 포도, 다래, 신선한 채소처럼 담백하고 서늘한 음식',
+    bad:'맵고 기름진 음식, 고열량 육류, 과음'},
+  TE:{n:'태음인', h:'太陰人', k:['끈기','포용력','신중함'],
+    d:'한번 시작하면 꾸준히 해내는 끈기형. 너그럽고 듬직하지만, 변화를 싫어하고 결정을 미루는 면이 있습니다.',
+    body:'골격이 굵고 체격이 큰 편이며 허리 둘레가 발달한 경우가 많습니다. 땀이 많은 편이고, 땀을 흘리면 몸이 가벼워진다고 느낍니다.',
+    health:'살이 찌기 쉬워 체중과 혈압·혈당 관리가 중요합니다. 땀을 흘리는 유산소 운동이 잘 맞는 편입니다.',
+    good:'쇠고기, 콩·두부, 율무, 무, 도라지, 밤, 호두, 잣',
+    bad:'과식과 야식, 기름지고 단 고열량 음식, 과음'},
+  SY:{n:'소양인', h:'少陽人', k:['순발력','활달함','봉사심'],
+    d:'판단과 행동이 빠르고 밝은 에너지가 넘치는 타입. 정의감이 강하고 남을 잘 돕지만, 쉽게 싫증 내고 마무리가 약할 수 있습니다.',
+    body:'가슴과 어깨가 발달하고 엉덩이와 하체가 가벼운 편입니다. 몸에 열이 많아 더위를 잘 타고 찬 것을 좋아합니다.',
+    health:'몸의 열을 가라앉히는 것이 핵심입니다. 충분한 수면과 수분 섭취로 열을 식히고, 급한 성격에서 오는 스트레스를 관리하세요.',
+    good:'돼지고기, 오리고기, 보리, 녹두, 오이, 참외, 수박, 굴·전복 같은 해산물',
+    bad:'맵고 뜨거운 음식, 인삼·꿀처럼 열을 올린다고 알려진 음식, 과음'},
+  SE:{n:'소음인', h:'少陰人', k:['섬세함','신중함','꼼꼼함'],
+    d:'차분하고 꼼꼼해 맡은 일을 정확하게 해내는 타입. 생각이 깊고 세심하지만, 걱정이 많고 쉽게 위축될 수 있습니다.',
+    body:'체격이 작고 마른 편이 많으며 상체보다 하체가 안정된 편입니다. 손발이 차고 추위를 잘 타는 경우가 많습니다.',
+    health:'소화기가 약해 규칙적으로 조금씩 먹는 것이 좋습니다. 몸을 따뜻하게 유지하고, 땀을 지나치게 빼는 운동은 피하세요.',
+    good:'닭고기, 찹쌀, 생강, 대추, 인삼, 꿀, 감자, 따뜻한 국물 음식',
+    bad:'찬 음식과 날음식, 아이스 음료, 소화가 어려운 기름진 음식'}
+};
+const ORDER = ['TY','TE','SY','SE'];
+
+let idx = 0;
+const answers = new Array(QUESTIONS.length).fill(null);
+const $ = id => document.getElementById(id);
+function show(id) {
+  ['intro','quiz','result'].forEach(x => $(x).classList.toggle('hidden', x !== id));
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function renderQ() {
+  const q = QUESTIONS[idx];
+  $('cnt').textContent = (idx + 1) + ' / ' + QUESTIONS.length;
+  $('bar').style.width = (idx / QUESTIONS.length * 100) + '%';
+  $('qText').textContent = q.t;
+  $('prevBtn').style.visibility = idx === 0 ? 'hidden' : 'visible';
+  document.querySelectorAll('#scale button').forEach(b => b.classList.toggle('on', Number(b.dataset.v) === answers[idx]));
+}
+$('startBtn').addEventListener('click', () => { idx = 0; show('quiz'); renderQ(); });
+document.querySelectorAll('#scale button').forEach(b => {
+  b.addEventListener('click', () => {
+    answers[idx] = Number(b.dataset.v);
+    if (idx < QUESTIONS.length - 1) { idx++; renderQ(); } else { finish(); }
+  });
+});
+$('prevBtn').addEventListener('click', () => { if (idx > 0) { idx--; renderQ(); } });
+$('retryBtn').addEventListener('click', () => { answers.fill(null); show('intro'); });
+
+function finish() {
+  // 체질별 5문항, 점수 합 5~25 → 0~100%
+  const sum = {TY:0, TE:0, SY:0, SE:0};
+  QUESTIONS.forEach((q, i) => { sum[q.c] += answers[i]; });
+  const pct = {};
+  ORDER.forEach(c => pct[c] = Math.round((sum[c] - 5) / 20 * 100));
+  // 최고점 체질. 동점이면 태양인은 드문 체질이라 뒤로 미룸
+  const ranked = ORDER.slice().sort((a, b) => (sum[b] - sum[a]) || ((a === 'TY') - (b === 'TY')));
+  const top = ranked[0], second = ranked[1];
+  const t = TYPES[top];
+  $('bar').style.width = '100%';
+  $('rType').textContent = t.n;
+  let nick = t.h;
+  if (sum[top] - sum[second] <= 1) nick += ' · ' + TYPES[second].n + ' 성향도 함께 보여요';
+  $('rNick').textContent = nick;
+  $('rKw').innerHTML = t.k.map(k => `<span class="tag">${k}</span>`).join('');
+  $('rDesc').textContent = t.d;
+  $('rBars').innerHTML = ORDER.map(c => `<div class="bar-row${c === top ? ' top' : ''}"><span>${TYPES[c].n}</span>
+    <div class="track"><div class="fill" style="width:${pct[c]}%"></div></div><span>${pct[c]}%</span></div>`).join('');
+  $('rBody').textContent = t.body;
+  $('rHealth').textContent = t.health;
+  $('rGood').textContent = t.good;
+  $('rBad').textContent = t.bad;
+  show('result');
+}
+</script>
+</body>
+</html>
