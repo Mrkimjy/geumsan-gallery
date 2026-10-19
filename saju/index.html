@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>사주 보기 · PeConnecton</title>
 <meta name="description" content="생년월일과 태어난 시간으로 사주 네 기둥을 뽑아 보는 재미있는 사주 풀이 페이지">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PeConnecton">
+<meta property="og:title" content="사주 보기 · PeConnecton">
+<meta property="og:description" content="생년월일과 태어난 시간으로 사주 네 기둥을 뽑아 보는 재미 사주 풀이.">
+<meta property="og:url" content="https://mrkimjy.github.io/geumsan-gallery/saju/">
+<meta property="og:image" content="https://mrkimjy.github.io/geumsan-gallery/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="robots" content="index, follow">
 <style>
   :root { --bg:#0A0A0A; --card:#141414; --line:#262626; --fg:#F2F2F2; --sub:#A3A3A3; --accent:#FC6A10; }
@@ -42,6 +50,9 @@
   .tag { display: inline-block; font-size: 12px; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 2px 10px; margin: 0 6px 6px 0; }
   .note { font-size: 12px; color: #A3A3A3; line-height: 1.6; margin-top: 14px; word-break: keep-all; }
   .hidden { display: none; }
+  .share-btn { margin-top: 20px; }
+  .share-toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: #FEE500; color: #191919; font-size: 14px; font-weight: 600; padding: 12px 18px; border-radius: 12px; opacity: 0; pointer-events: none; transition: .25s; width: max-content; max-width: calc(100% - 32px); text-align: center; word-break: keep-all; }
+  .share-toast.on { opacity: 1; transform: translate(-50%, 0); }
 </style>
 </head>
 <body>
@@ -99,6 +110,7 @@
       <div class="kw" id="ohText"></div>
     </div>
 
+    <button class="btn share-btn" id="shareBtn" type="button">카톡으로 결과 공유하기</button>
     <div class="note">
       ※ 이 풀이는 재미로 보는 콘텐츠이며 과학적 근거가 없습니다. 중요한 결정은 스스로 판단해 주세요.<br>
       ※ 월주는 절기 날짜를 근사치로 계산합니다. 절기 경계일(매월 4~8일 무렵)에 태어나셨다면 한두 시간 차이로 결과가 달라질 수 있습니다.<br>
@@ -240,6 +252,7 @@ function render(saju, hasHour) {
   if (weak.length) parts.push(`${weak.join('·')} 기운이 없어서, 이 부분을 주변 사람이나 환경으로 채우면 균형이 잡힌다고 봅니다.`);
   if (!parts.length) parts.push('다섯 기운이 고르게 분포되어 있어요.');
   document.getElementById('ohText').textContent = parts.join(' ');
+  window.SHARE_TEXT = `내 일간은 ${dm.kr}(${dm.hj}), ${dm.el}이래! 재미로 보는 사주, 너도 해 봐.`;
 }
 
 document.getElementById('form').addEventListener('submit', e => {
@@ -261,6 +274,23 @@ document.getElementById('form').addEventListener('submit', e => {
 
 // 테스트용 노출 (브라우저 콘솔 확인용)
 window.__calcSaju = calcSaju;
+</script>
+<div class="share-toast" id="shareToast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  function toast(m){var t=document.getElementById('shareToast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},2600);}
+  function copy(s){
+    if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(s);}
+    return new Promise(function(ok,no){var a=document.createElement('textarea');a.value=s;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')?ok():no()}catch(e){no(e)}a.remove();});
+  }
+  window.shareResult=function(){
+    var url=location.origin+location.pathname, text=window.SHARE_TEXT||document.title;
+    if(navigator.share){navigator.share({title:document.title,text:text,url:url}).catch(function(e){if(e&&e.name!=='AbortError')fallback();});return;}
+    fallback();
+    function fallback(){copy(text+'\n'+url).then(function(){toast('결과와 링크를 복사했어요. 카톡 대화창에 붙여 넣어 주세요.')},function(){toast('복사가 안 됐어요. 주소창의 링크를 직접 보내 주세요.')});}
+  };
+  document.getElementById('shareBtn').addEventListener('click',window.shareResult);
+})();
 </script>
 </body>
 </html>

@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>사상체질 자가진단 · PeConnecton</title>
 <meta name="description" content="40문항 설문으로 보는 사상체질(태양인·태음인·소양인·소음인) 자가진단. 참고용 콘텐츠입니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PeConnecton">
+<meta property="og:title" content="사상체질 자가진단 · PeConnecton">
+<meta property="og:description" content="설문으로 보는 사상체질 자가진단. 나는 태양인, 태음인, 소양인, 소음인 중 어디에 가까울까요?">
+<meta property="og:url" content="https://mrkimjy.github.io/geumsan-gallery/sasang/">
+<meta property="og:image" content="https://mrkimjy.github.io/geumsan-gallery/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="robots" content="index, follow">
 <style>
   :root { --bg:#0A0A0A; --card:#141414; --line:#262626; --fg:#F2F2F2; --sub:#A3A3A3; --accent:#FC6A10; }
@@ -52,6 +60,9 @@
   .sec h3 { font-size: 14px; color: var(--accent); margin-bottom: 6px; }
   .sec p { font-size: 14px; color: #d8d8d8; word-break: keep-all; }
   .type { font-size: 44px; letter-spacing: 0; }
+  .share-btn { margin-top: 20px; }
+  .share-toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: #FEE500; color: #191919; font-size: 14px; font-weight: 600; padding: 12px 18px; border-radius: 12px; opacity: 0; pointer-events: none; transition: .25s; width: max-content; max-width: calc(100% - 32px); text-align: center; word-break: keep-all; }
+  .share-toast.on { opacity: 1; transform: translate(-50%, 0); }
 </style>
 </head>
 <body>
@@ -91,7 +102,8 @@
     <div class="sec"><h3>건강 관리 포인트</h3><p id="rHealth"></p></div>
     <div class="sec"><h3>잘 맞는다고 알려진 음식</h3><p id="rGood"></p></div>
     <div class="sec"><h3>조심하면 좋은 음식</h3><p id="rBad"></p></div>
-    <div style="margin-top:20px"><button class="btn ghost" id="retryBtn">다시 진단하기</button></div>
+    <button class="btn share-btn" id="shareBtn" type="button">카톡으로 결과 공유하기</button>
+    <div style="margin-top:10px"><button class="btn ghost" id="retryBtn">다시 진단하기</button></div>
     <div class="note">※ 설문으로 보는 참고용 자가진단입니다. 정확한 체질 판별과 치료는 한의사 진료를 받으세요. 질환이 있거나 약을 드시는 중이라면 식단을 바꾸기 전에 전문가와 상담하세요.</div>
   </div>
 </div>
@@ -216,8 +228,26 @@ function finish() {
   $('rHealth').textContent = t.health;
   $('rGood').textContent = t.good;
   $('rBad').textContent = t.bad;
+  window.SHARE_TEXT = `내 체질은 ${t.n}이래! 사상체질 자가진단, 너도 해 봐.`;
   show('result');
 }
+</script>
+<div class="share-toast" id="shareToast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  function toast(m){var t=document.getElementById('shareToast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('on')},2600);}
+  function copy(s){
+    if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(s);}
+    return new Promise(function(ok,no){var a=document.createElement('textarea');a.value=s;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')?ok():no()}catch(e){no(e)}a.remove();});
+  }
+  window.shareResult=function(){
+    var url=location.origin+location.pathname, text=window.SHARE_TEXT||document.title;
+    if(navigator.share){navigator.share({title:document.title,text:text,url:url}).catch(function(e){if(e&&e.name!=='AbortError')fallback();});return;}
+    fallback();
+    function fallback(){copy(text+'\n'+url).then(function(){toast('결과와 링크를 복사했어요. 카톡 대화창에 붙여 넣어 주세요.')},function(){toast('복사가 안 됐어요. 주소창의 링크를 직접 보내 주세요.')});}
+  };
+  document.getElementById('shareBtn').addEventListener('click',window.shareResult);
+})();
 </script>
 </body>
 </html>
