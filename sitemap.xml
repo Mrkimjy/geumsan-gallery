@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://mrkimjy.github.io/geumsan-gallery/</loc><lastmod>2026-10-11</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://mrkimjy.github.io/geumsan-gallery/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://mrkimjy.github.io/geumsan-gallery/food/castle-1477.html</loc><lastmod>2026-10-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mrkimjy.github.io/geumsan-gallery/food/eojjeoda-namhae.html</loc><lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mrkimjy.github.io/geumsan-gallery/food/namhae-solbeach-food.html</loc><lastmod>2026-10-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -16,4 +16,6 @@
   <url><loc>https://mrkimjy.github.io/geumsan-gallery/food/ashley-queens.html</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mrkimjy.github.io/geumsan-gallery/food/minsok-icheon.html</loc><lastmod>2026-10-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://mrkimjy.github.io/geumsan-gallery/sasang/</loc><lastmod>2026-10-19</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://mrkimjy.github.io/geumsan-gallery/mbti/</loc><lastmod>2026-10-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://mrkimjy.github.io/geumsan-gallery/saju/</loc><lastmod>2026-10-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
