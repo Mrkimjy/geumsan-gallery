@@ -1,23 +1,23 @@
 {
- "updated": "2026.11.21 12:48",
+ "updated": "2026.11.22 11:52",
  "HR": [
   {
    "emoji": "👥",
+   "source": "이데일리",
+   "headline": "\"오픈AI 기업문화 무너져\"…퇴사 직원, AI 폭주 경고",
+   "summary": "이데일리 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.11.22",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxORmprakJFQlNBN0hSWjdyaDVVaHg0bGZsNndZczVjZHMzUGMxNzRUNUNYY3FMbmJHa3ZpN2tnaXJVYmJ0aW1CV214cmNmczNfQkg3bkM3NndxX2c5SUFhYWpoRzdoUWZtYUJrbXZzOGt2ckZpZl83WDdpOFN1dUE4SA?oc=5"
+  },
+  {
+   "emoji": "🤝",
    "source": "위키리크스한국",
    "headline": "LG이노텍, 기술 리더십 강화에 방점…조지태 부사장 승진",
    "summary": "위키리크스한국 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
    "date": "2026.11.20",
-   "isNew": true,
-   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBGeWR6SGtNZFh1bXJveXc0b0tBQzZsUUx6RTRGck1YYnd3Umo1X1l0eFlEcHFmejBlclh6dFhLdXhIRDlQaWlSNG5FVTlwY2QxOGFsVHdoWUJGQ3hVc1k0SEE2eS1sNXpwZnZNeWpoaDI?oc=5"
-  },
-  {
-   "emoji": "🤝",
-   "source": "해사신문",
-   "headline": "한국해양진흥공사, 노사관계 우수기업 3년 연속 인증…노사 소통 확대·조직문화 혁신 성과 인정",
-   "summary": "해사신문 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.11.18",
    "isNew": false,
-   "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE10SUt6aW56TG8yV3ZBUjRGV2VMNWlLemJZcEFVOTNQci1VTnpwa1BuWEVpOExTUTgwVXRoSGthRlEyaml3bk1paS1ZQzR2NlhZWGVYT0JPOUkzX2NTcExVV3Q4dXEzYVlickpZ?oc=5"
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBGeWR6SGtNZFh1bXJveXc0b0tBQzZsUUx6RTRGck1YYnd3Umo1X1l0eFlEcHFmejBlclh6dFhLdXhIRDlQaWlSNG5FVTlwY2QxOGFsVHdoWUJGQ3hVc1k0SEE2eS1sNXpwZnZNeWpoaDI?oc=5"
   },
   {
    "emoji": "🎓",
@@ -41,26 +41,35 @@
   },
   {
    "emoji": "🚗",
+   "source": "서울경제TV",
+   "headline": "금호타이어 정일택 “자율주행시대 타이어, 안전 완성하는 마지막 퍼즐 ”",
+   "summary": "서울경제TV 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.11.22",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBXZzlralZLQzA2bEh6Ti1HMGhZdTZnU3Q5SWpxQnpEWEl3TFhfbGpLb1lXVXp5b0J0RE1kOHMwVG9XQ1o0R1hsZHBuQmhwMmtic19MWVRSY1pTLXN1OXBQM01MYzM?oc=5"
+  },
+  {
+   "emoji": "🏭",
    "source": "한국세정신문",
    "headline": "정일택 금호타이어 사장 \"스마트 타이어로 미래 모빌리티 안전 이끌 것\"",
    "summary": "한국세정신문 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
    "date": "2026.11.20",
-   "isNew": true,
+   "isNew": false,
    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE8zUF9lZlRFOWRnalFjekszYk9McVloaEw1a25JRmRsMlAzOTZ3WndiMlhKTTluVW9RdmpfUk9oUnpqVlBOVC0zekotVEJ5d2IyYzJSZ1pUa0QxY29SQzNZ?oc=5"
-  },
-  {
-   "emoji": "🏭",
-   "source": "뉴스핌",
-   "headline": "정일택 금호타이어 사장 \"타이어가 자율주행 안전 완성\"",
-   "summary": "뉴스핌 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.11.20",
-   "isNew": true,
-   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5seTQ4akxaR1E4TXBvR29xUS1zYkVjTFFFVnpJSFZyRnk3Wi1sQVY0ZjNQTGZKcWYzbVBOd0RDbFlrS2VseUN6MUw5UnVwNkFNV1J1Y05OT1NtZVo1?oc=5"
   }
  ],
  "Econ": [
   {
    "emoji": "📈",
+   "source": "SPI - 상업용 부동산 콘텐츠 &…",
+   "headline": "리츠 시장에서 존재감 사라진 국토부, 3개월 만에 부동산투자제도과장 선임 - SPI - 상업용 부동산…",
+   "summary": "SPI - 상업용 부동산 콘텐츠 & 데이터 애널리틱스 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
+   "date": "2026.11.21",
+   "isNew": true,
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE4yYWgzZnE5SUxZN3Iwd3lYM1N4UXVWa1doUFZkelJVY1ZwVUJLcVUtWnNGSGZleDA3N2t5bzk1YUdiNXlSUHZFX3UtZEFKamExckhIQ2lwM2x6cG8?oc=5"
+  },
+  {
+   "emoji": "💰",
    "source": "진일보 | 전남일보",
    "headline": "커피값으로 ‘건물주’ 된다… 리츠, 소액 부동산 투자 길 열어",
    "summary": "진일보 | 전남일보 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
@@ -69,22 +78,13 @@
    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFB4SWJWTnJsVlhYclV1cDFwYVRBMlZDODIwV19rWlczbGhPWWxCZ2Q0TlZkNC1pSXh4ZGVCem1XUkxCeHI2dnRic2ZfYmwzMkh5ek44UHFzSnpZcTlNZTRaLXBHRnNqSUFUSUtIc0ptRQ?oc=5"
   },
   {
-   "emoji": "💰",
-   "source": "매일경제",
-   "headline": "금감원 \"고금리 퇴직연금상품, 대기업 몰아주기 안돼\"",
-   "summary": "금융감독원이 퇴직연금시장의 '불공정 영업' 행위에 엄정 대응 방침을 밝혔다. 금감원은 19일 은행연합회·금융투자협회·생명보험협회·손해보험협회 4대 금융협회 및 퇴직연금 사업자 담당..",
-   "date": "2026.11.19",
-   "isNew": false,
-   "url": "https://www.mk.co.kr/news/stock/12213803"
-  },
-  {
    "emoji": "🏦",
-   "source": "뉴스투데이",
-   "headline": "[고금리 시대, 자산관리 전략을 묻다⑤] 정성훈 NH농협은행 전문위원 \"금소세·양도세 절세 전략 세울…",
-   "summary": "뉴스투데이 보도. 카드를 눌러 원문에서 자세한 내용을 확인하세요.",
-   "date": "2026.11.20",
+   "source": "매일경제",
+   "headline": "“주담대 금리 치솟아도 돈 빌릴 곳 없으니”…집단대출 늘며 잔액 증가폭 ‘쑥’",
+   "summary": "주담대 잔액 958.7조원 증가세 중도금·이주비 대출 수요 이어져은행권 주택담보대출 금리가 14년여 만에 최고 수준으로 올랐지만 대출잔액 증가폭은 오히려 확대된 것으로 나타났다. ..",
+   "date": "2026.11.22",
    "isNew": true,
-   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE8zNC0zTHF4dmRaTW1GVmNBUmVNbm10akZDci1PcTl2YVV6SW8tYjRucF9XTW1EdWFzYVB1RGRaT2NXVFRBbFNaUEZlVnFCQWRaai00Z2dLN1REN2pEWWc?oc=5"
+   "url": "https://www.mk.co.kr/news/economy/12215366"
   }
  ]
 }
